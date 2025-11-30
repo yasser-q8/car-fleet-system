@@ -1544,11 +1544,36 @@
         const sampleDeliveries = [];
         
         // بيانات المستخدمين
-        const sampleUsers = [
-            { id: 1, username: "Naif", email: "naif@naif.com", password: "123", role: "data_entry", created: "2026-01-15", status: "نشط" },
-            { id: 2, username: "Ibrahim", email: "ibrahim@naif.com", password: "123", role: "admin", created: "2026-02-20", status: "نشط" },
-            { id: 3, username: "Yasser", email: "yasser@naif.com", password: "123", role: "super_admin", created: "2026-03-10", status: "نشط" }
-        ];
+        // بيانات المستخدمين الافتراضية - معدلة ومؤكدة
+const sampleUsers = [
+    { 
+        id: 1, 
+        username: "Naif", 
+        email: "naif@naif.com", 
+        password: "123", 
+        role: "data_entry", 
+        created: "2025-11-30", 
+        status: "نشط" 
+    },
+    { 
+        id: 2, 
+        username: "Ibrahim", 
+        email: "ibrahim@naif.com", 
+        password: "123", 
+        role: "admin", 
+        created: "2025-11-30", 
+        status: "نشط" 
+    },
+    { 
+        id: 3, 
+        username: "Yasser", 
+        email: "yasser@naif.com", 
+        password: "123@321", 
+        role: "super_admin", 
+        created: "2025-11-30", 
+        status: "نشط" 
+    }
+];
 
         // حالة التطبيق
         let currentLanguage = 'ar';
@@ -2126,6 +2151,10 @@ function saveAllData() {
         });
 
         function initializeApp() {
+// تهيئة بيانات المستخدمين إذا لم تكن موجودة
+    if (!localStorage.getItem('usersData') || JSON.parse(localStorage.getItem('usersData')).length === 0) {
+        localStorage.setItem('usersData', JSON.stringify(sampleUsers));
+    }
     setupEventListeners();
     updateUIForLanguage();
     loadCompanySettings();
@@ -2133,7 +2162,7 @@ function saveAllData() {
     initializeCarSketch();
     
     // تحميل رابط Google Sheets
-    document.getElementById('googleSheetsUrl').value = GOOGLE_SHEETS_URL;
+    document.getElementById('googleSheetsUrl').value = 'https://docs.google.com/spreadsheets/d/1cG0Ki-bcx6ZibAr4e2ihAy8Hdk1A3qwPIItxRdXigCE/edit?usp=sharing';
     
     // بدء المزامنة التلقائية
     startAutoSync();
