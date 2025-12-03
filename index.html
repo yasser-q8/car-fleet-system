@@ -1396,7 +1396,20 @@
                 <button class="btn btn-secondary" id="exportToGitHub">تصدير البيانات للتحميل</button>
                 <button class="btn btn-info" id="syncWithGitHub">مزامنة مع GitHub</button>
                 
-                <h3>إعدادات الشركة</h3>
+                <!-- إضافة قسم GitHub Token هنا -->
+                <h3 style="margin-top: 30px;">إعدادات GitHub Token</h3>
+                <div class="form-group">
+                    <label for="githubToken">GitHub Token (للتصدير)</label>
+                    <input type="password" id="githubToken" placeholder="أدخل GitHub Token الخاص بك">
+                    <small>
+                        <a href="https://github.com/settings/tokens" target="_blank">أنشئ توكن هنا</a> 
+                        مع صلاحيات <code>repo</code>
+                    </small>
+                </div>
+                <button class="btn btn-primary" id="saveGitHubToken">حفظ التوكن</button>
+                <button class="btn btn-warning" id="exportToGitHubBtn">تصدير البيانات إلى GitHub</button>
+                
+                <h3 style="margin-top: 30px;">إعدادات الشركة</h3>
                 <div class="form-group">
                     <label for="companyName">اسم الشركة</label>
                     <input type="text" id="companyName" placeholder="أدخل اسم الشركة">
@@ -1496,7 +1509,7 @@
             </div>
             <div class="form-group">
                 <label for="newUserRole" id="newUserRoleLabel">نوع المستخدم</label>
-                <select id="newUserRole">
+                                <select id="newUserRole">
                     <option value="data_entry">مدخل بيانات</option>
                     <option value="admin">أدمن</option>
                     <option value="super_admin">سوبر أدمن</option>
@@ -1592,92 +1605,6 @@ const sampleUsers = [
 
 // ========== نظام المزامنة مع GitHub ==========
 
-// دالة للمزامنة مع GitHub
-async function syncWithGitHub() {
-    if (!currentUser) {
-        console.log('⏸️ توقف المزامنة - لا يوجد مستخدم مسجل دخول');
-        return;
-    }
-    
-    try {
-        console.log('🔃 بدء المزامنة مع GitHub...');
-        
-        // تحميل البيانات من GitHub
-        await loadDataFromGitHub();
-        
-        console.log('✅ تمت المزامنة مع GitHub بنجاح');
-        
-        // عرض إشعار نجاح المزامنة
-        showSyncNotification('تمت المزامنة مع GitHub بنجاح', 'success');
-        
-    } catch (error) {
-        console.error('❌ فشل في المزامنة مع GitHub:', error);
-        showSyncNotification('فشل في المزامنة مع GitHub', 'error');
-    }
-}
-
-// دالة لبدء المزامنة التلقائية الدورية
-function startAutoSync() {
-    // المزامنة كل 30 ثانية (يمكن تعديل المدة حسب الحاجة)
-    const SYNC_INTERVAL = 50000;
-    
-    // لا تبدأ المزامنة إلا بعد تسجيل الدخول
-    console.log('⏳ المزامنة التلقائية بانتظار تسجيل الدخول...');
-    
-    // المزامنة الدورية بعد تسجيل الدخول فقط
-    setInterval(() => {
-        if (currentUser) { // فقط إذا كان المستخدم مسجل الدخول
-            syncWithGitHub();
-        }
-    }, SYNC_INTERVAL);
-}
-
-// دالة لعرض إشعارات المزامنة
-function showSyncNotification(message, type) {
-    // إنشاء عنصر الإشعار إذا لم يكن موجوداً
-    let notification = document.getElementById('syncNotification');
-    if (!notification) {
-        notification = document.createElement('div');
-        notification.id = 'syncNotification';
-        notification.style.cssText = `
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            padding: 15px 20px;
-            border-radius: 8px;
-            color: white;
-            font-weight: bold;
-            z-index: 10000;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-            max-width: 300px;
-            text-align: center;
-        `;
-        document.body.appendChild(notification);
-    }
-    
-    // تحديد لون الإشعار حسب النوع
-    if (type === 'success') {
-        notification.style.backgroundColor = '#2ecc71';
-    } else if (type === 'error') {
-        notification.style.backgroundColor = '#e74c3c';
-    } else {
-        notification.style.backgroundColor = '#3498db';
-    }
-    
-    notification.textContent = message;
-    notification.style.display = 'block';
-    notification.style.opacity = '1';
-    
-    // إخفاء الإشعار بعد 3 ثوان
-    setTimeout(() => {
-        notification.style.opacity = '0';
-        setTimeout(() => {
-            notification.style.display = 'none';
-        }, 300);
-    }, 3000);
-}
-
 // دالة محسنة لتحميل البيانات من GitHub
 async function loadDataFromGitHub() {
     if (!GITHUB_DATA_URL) {
@@ -1728,7 +1655,7 @@ async function loadDataFromGitHub() {
             }
         }
 
-        // 3. دعم المستخدمين
+        // 3. دمج المستخدمين
         if (remoteData.usersData && remoteData.usersData.length > 0) {
             const newUsers = remoteData.usersData.filter(remoteUser => 
                 !usersData.some(localUser => localUser.username === remoteUser.username)
@@ -1753,18 +1680,110 @@ async function loadDataFromGitHub() {
 
     } catch (error) {
         console.error('❌ خطأ في تحميل البيانات:', error);
-        // ❌ لا تعرض إشعار خطأ حتى لا يزعج المستخدمين
         return false;
     }
 }
-// دالة لتصدير البيانات إلى ملف JSON للتحميل
+
+// ========== نظام التصدير إلى GitHub ==========
+
+// دالة لتصدير البيانات إلى GitHub (يتطلب GitHub Token)
+async function pushToGitHub() {
+    if (!currentUser || currentUser.role !== 'super_admin') {
+        console.log('⛔ صلاحية غير كافية للتصدير إلى GitHub');
+        alert('هذه الميزة متاحة فقط للسوبر أدمن');
+        return;
+    }
+    
+    try {
+        // 🔒 جلب التوكن من localStorage (يجب تخزينه يدوياً أولاً)
+        const githubToken = localStorage.getItem('githubToken');
+        if (!githubToken) {
+            alert('❌ لم يتم إعداد GitHub Token. يرجى إضافته في الإعدادات أولاً.');
+            return;
+        }
+        
+        const repoOwner = 'yasser-q8'; // اسم حسابك
+        const repoName = 'car-fleet-system'; // اسم المستودع
+        const filePath = 'data.json'; // المسار داخل المستودع
+        
+        // 📦 تجميع البيانات للتصدير
+        const dataToPush = {
+            carsData: carsData,
+            deliveriesData: deliveriesData,
+            restaurantsData: restaurantsData,
+            usersData: usersData,
+            lastUpdate: new Date().toISOString()
+        };
+        
+        console.log('🚀 بدء التصدير إلى GitHub...');
+        
+        // 1. الحصول على معلومات الملف الحالي
+        const getFileUrl = `https://api.github.com/repos/${repoOwner}/${repoName}/contents/${filePath}`;
+        const getResponse = await fetch(getFileUrl, {
+            headers: {
+                'Authorization': `token ${githubToken}`,
+                'Accept': 'application/vnd.github.v3+json'
+            }
+        });
+        
+        let sha = null;
+        if (getResponse.ok) {
+            const fileInfo = await getResponse.json();
+            sha = fileInfo.sha; // SHA ضروري لتحديث الملف
+        }
+        
+        // 2. تحويل البيانات إلى Base64
+        const content = JSON.stringify(dataToPush, null, 2);
+        const contentBase64 = btoa(unescape(encodeURIComponent(content)));
+        
+        // 3. إنشاء أو تحديث الملف
+        const updateUrl = `https://api.github.com/repos/${repoOwner}/${repoName}/contents/${filePath}`;
+        const payload = {
+            message: `Auto-sync: ${new Date().toISOString()}`,
+            content: contentBase64,
+            sha: sha, // إذا كان null، سيتم إنشاء ملف جديد
+            branch: 'main'
+        };
+        
+        const updateResponse = await fetch(updateUrl, {
+            method: 'PUT',
+            headers: {
+                'Authorization': `token ${githubToken}`,
+                'Content-Type': 'application/json',
+                'Accept': 'application/vnd.github.v3+json'
+            },
+            body: JSON.stringify(payload)
+        });
+        
+        if (updateResponse.ok) {
+            console.log('✅ تم تصدير البيانات إلى GitHub بنجاح');
+            showSyncNotification('تم التصدير إلى GitHub بنجاح', 'success');
+            
+            // تحديث وقت آخر مزامنة
+            localStorage.setItem('lastSyncToGitHub', new Date().toISOString());
+            return true;
+        } else {
+            const errorData = await updateResponse.json();
+            console.error('❌ فشل التصدير:', errorData);
+            showSyncNotification(`فشل التصدير: ${errorData.message || 'خطأ غير معروف'}`, 'error');
+            return false;
+        }
+        
+    } catch (error) {
+        console.error('❌ خطأ في التصدير إلى GitHub:', error);
+        showSyncNotification('خطأ في التصدير إلى GitHub', 'error');
+        return false;
+    }
+}
+
+// دالة مبسطة للتصدير بدون GitHub Token (للتحميل فقط)
 function exportDataForGitHub() {
     const dataToSave = {
         carsData: carsData,
         deliveriesData: deliveriesData,
         restaurantsData: restaurantsData,
         usersData: usersData,
-        lastSync: new Date().toISOString()
+        lastUpdate: new Date().toISOString()
     };
 
     const dataStr = JSON.stringify(dataToSave, null, 2);
@@ -1778,6 +1797,120 @@ function exportDataForGitHub() {
     
     console.log('✅ تم تصدير البيانات للتحميل');
     showSyncNotification('تم تصدير البيانات للتحميل', 'success');
+}
+
+// دالة للمزامنة مع GitHub
+async function syncWithGitHub() {
+    if (!currentUser) {
+        console.log('⏸️ توقف المزامنة - لا يوجد مستخدم مسجل دخول');
+        return;
+    }
+    
+    try {
+        console.log('🔃 بدء المزامنة مع GitHub...');
+        
+        // 1. استيراد التحديثات من GitHub
+        const imported = await loadDataFromGitHub();
+        
+        // 2. تصدير التحديثات إلى GitHub (فقط للسوبر أدمن مع توكن)
+        const githubToken = localStorage.getItem('githubToken');
+        if (imported && githubToken && currentUser.role === 'super_admin') {
+            await pushToGitHub();
+        }
+        
+        console.log('✅ تمت المزامنة مع GitHub بنجاح');
+        
+    } catch (error) {
+        console.error('❌ فشل في المزامنة مع GitHub:', error);
+        showSyncNotification('فشل في المزامنة مع GitHub', 'error');
+    }
+}
+
+// دالة لبدء المزامنة التلقائية الدورية
+function startAutoSync() {
+    // المزامنة كل 5 دقائق (300000 مللي ثانية)
+    const SYNC_INTERVAL = 300000;
+    
+    // لا تبدأ المزامنة إلا بعد تسجيل الدخول
+    console.log('⏳ المزامنة التلقائية بانتظار تسجيل الدخول...');
+    
+    // المزامنة الدورية بعد تسجيل الدخول فقط
+    setInterval(() => {
+        if (currentUser) {
+            // 1. أولاً استورد التحديثات من GitHub
+            loadDataFromGitHub().then(updated => {
+                if (updated) {
+                    // 2. إذا كانت هناك تحديثات، صدّر البيانات المحلية (مدمجة)
+                    const githubToken = localStorage.getItem('githubToken');
+                    if (githubToken && currentUser.role === 'super_admin') {
+                        // انتظر 2 ثانية ثم صدّر
+                        setTimeout(() => {
+                            pushToGitHub();
+                        }, 2000);
+                    }
+                }
+            });
+        }
+    }, SYNC_INTERVAL);
+}
+
+// دالة لحفظ GitHub Token
+function saveGitHubToken() {
+    const token = document.getElementById('githubToken').value.trim();
+    if (token) {
+        localStorage.setItem('githubToken', token);
+        alert(currentLanguage === 'ar' ? 'تم حفظ GitHub Token بنجاح' : 'GitHub Token saved successfully');
+        document.getElementById('githubToken').value = ''; // مسح الحقل لأمان إضافي
+        document.getElementById('githubToken').placeholder = 'تم تخزين التوكن (******)';
+    } else {
+        alert(currentLanguage === 'ar' ? 'يرجى إدخال التوكن' : 'Please enter the token');
+    }
+}
+
+// دالة لعرض إشعارات المزامنة
+function showSyncNotification(message, type) {
+    // إنشاء عنصر الإشعار إذا لم يكن موجوداً
+    let notification = document.getElementById('syncNotification');
+    if (!notification) {
+        notification = document.createElement('div');
+        notification.id = 'syncNotification';
+        notification.style.cssText = `
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 15px 20px;
+            border-radius: 8px;
+            color: white;
+            font-weight: bold;
+            z-index: 10000;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            max-width: 300px;
+            text-align: center;
+        `;
+        document.body.appendChild(notification);
+    }
+    
+    // تحديد لون الإشعار حسب النوع
+    if (type === 'success') {
+        notification.style.backgroundColor = '#2ecc71';
+    } else if (type === 'error') {
+        notification.style.backgroundColor = '#e74c3c';
+    } else {
+        notification.style.backgroundColor = '#3498db';
+    }
+    
+    notification.textContent = message;
+    notification.style.display = 'block';
+    notification.style.opacity = '1';
+    
+    // إخفاء الإشعار بعد 3 ثوان
+    setTimeout(() => {
+        notification.style.opacity = '0';
+        setTimeout(() => {
+            notification.style.display = 'none';
+        }, 300);
+    }, 3000);
 }
 
 // دالة لحفظ جميع البيانات في التخزين المحلي
@@ -2060,7 +2193,8 @@ function saveGitHubUrl() {
             console.log('⚠️ فشل التحميل التلقائي، استخدام البيانات المحلية');
         });
     }, 3000);
-            if (!localStorage.getItem('usersData') || JSON.parse(localStorage.getItem('usersData')).length === 0) {
+    
+    if (!localStorage.getItem('usersData') || JSON.parse(localStorage.getItem('usersData')).length === 0) {
         localStorage.setItem('usersData', JSON.stringify(sampleUsers));
     }
     
@@ -2070,6 +2204,12 @@ function saveGitHubUrl() {
         GITHUB_DATA_URL = savedGitHubUrl;
         document.getElementById('githubDataUrl').value = savedGitHubUrl;
         document.getElementById('githubDataLink').href = savedGitHubUrl;
+    }
+    
+    // تحميل GitHub Token المحفوظ
+    const savedToken = localStorage.getItem('githubToken');
+    if (savedToken) {
+        document.getElementById('githubToken').placeholder = 'تم تخزين التوكن (******)';
     }
     
     setupEventListeners();
@@ -2108,12 +2248,11 @@ function saveGitHubUrl() {
             // نموذج التسليم/الاستلام
             document.getElementById('showDeliveryForm').addEventListener('click', showDeliveryForm);
             document.getElementById('showReceiptForm').addEventListener('click', showReceiptForm);
-           // في حالة وجود هذا الكود، تأكد أنه يستدعي الدالة الصحيحة
-document.getElementById('cancelDelivery').addEventListener('click', function() {
-    hideDeliveryForm();
-    resetDeliveryForm();
-    alert('تم إلغاء العملية');
-});
+            document.getElementById('cancelDelivery').addEventListener('click', function() {
+                hideDeliveryForm();
+                resetDeliveryForm();
+                alert('تم إلغاء العملية');
+            });
             document.getElementById('saveDelivery').addEventListener('click', saveDelivery);
             document.getElementById('clearScratches').addEventListener('click', clearScratches);
             
@@ -2182,6 +2321,10 @@ document.getElementById('cancelDelivery').addEventListener('click', function() {
             document.getElementById('syncWithGitHub').addEventListener('click', syncWithGitHub);
             document.getElementById('loadFromGitHub').addEventListener('click', syncWithGitHub);
             document.getElementById('syncData').addEventListener('click', syncWithGitHub);
+            
+            // GitHub Token الجديدة
+            document.getElementById('saveGitHubToken').addEventListener('click', saveGitHubToken);
+            document.getElementById('exportToGitHubBtn').addEventListener('click', pushToGitHub);
             
             // إغلاق النماذج
             document.getElementById('closeCarModal').addEventListener('click', () => 
