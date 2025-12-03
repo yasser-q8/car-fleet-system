@@ -3,11 +3,11 @@
     {
       "id": 108,
       "number": "99999",
-      "type": "نيسان",
-      "model": "صني",
+      "type": "ررررررررررررررررررر",
+      "model": "رررررررررررررررر",
       "year": 2000,
-      "licenseExpiry": "2009-12-01",
-      "adLicenseExpiry": null,
+      "licenseExpiry": "2025-12-01",
+      "adLicenseExpiry": "2025-12-12",
       "status": "نشطة"
     },
     {
@@ -1079,42 +1079,69 @@
       "licenseExpiry": "2036-04-21",
       "adLicenseExpiry": "2036-07-07",
       "status": "نشطة"
+    },
+    {
+      "id": 108,
+      "number": "54545454545",
+      "type": "يييييييي",
+      "model": "بببببببب",
+      "year": 2000,
+      "licenseExpiry": "2009-12-01",
+      "adLicenseExpiry": null,
+      "status": "نشطة"
+    },
+    {
+      "id": 109,
+      "number": "11111111111",
+      "type": "TTTTTTTTTT",
+      "model": "CCCCCCCCC",
+      "year": 2024,
+      "licenseExpiry": "2024-01-01",
+      "adLicenseExpiry": null,
+      "status": "نشطة"
+    },
+    {
+      "id": 110,
+      "number": "85208520",
+      "type": "قققققققققققق",
+      "model": "قققققققققق",
+      "year": 2020,
+      "licenseExpiry": "2025-01-01",
+      "adLicenseExpiry": null,
+      "status": "نشطة"
+    },
+    {
+      "id": 108,
+      "number": "99999",
+      "type": "نيسان",
+      "model": "صني",
+      "year": 2000,
+      "licenseExpiry": "2009-12-01",
+      "adLicenseExpiry": null,
+      "status": "نشطة"
     }
   ],
   "deliveriesData": [
     {
       "id": 1,
-      "carNumber": "123435",
-      "driverName": "ياسر",
-      "phoneNumber": "67011143",
-      "restaurant": "الفيحاء",
-      "receiveDate": "2025-11-30",
+      "carNumber": "88888",
+      "driverName": "أحمد محمد",
+      "phoneNumber": "12345678",
+      "restaurant": "جمعية العدان والقصور",
+      "receiveDate": "2024-01-15",
       "deliveryDate": "",
-      "notes": "",
-      "scratches": [
-        {
-          "id": 1,
-          "x": 126.5999755859375,
-          "y": 97.84999084472656,
-          "location": "الخلف"
-        },
-        {
-          "id": 2,
-          "x": 58.5999755859375,
-          "y": 97.84999084472656,
-          "location": "المقدمة"
-        }
-      ]
+      "notes": "لا توجد ملاحظات",
+      "scratches": []
     },
     {
       "id": 2,
-      "carNumber": "54545454545",
-      "driverName": "نتالبيئء",
-      "phoneNumber": "كمنتلبيء",
-      "restaurant": "الفيحاء",
-      "receiveDate": "2025-11-30",
-      "deliveryDate": "",
-      "notes": "",
+      "carNumber": "99999",
+      "driverName": "سالم علي",
+      "phoneNumber": "87654321",
+      "restaurant": "الجابرية بنت الديك",
+      "receiveDate": "2024-01-20",
+      "deliveryDate": "2024-01-25",
+      "notes": "تم التسليم في الموعد",
       "scratches": []
     }
   ],
@@ -1491,5 +1518,5 @@
       "status": "نشط"
     }
   ],
-  "lastUpdate": "2025-12-03T18:23:34.564Z"
+  "lastUpdate": "2025-12-03T20:30:30.759Z"
 }
