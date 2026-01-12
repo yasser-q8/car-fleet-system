@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Car Fleet Management System</title>
+    <title>نظام إدارة أسطول السيارات - شركة نايف للأغذية</title>
+    <link rel="icon" href="https://i.postimg.cc/NM2zJWZD/NAIF-LOGO.jpg">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.28/jspdf.plugin.autotable.min.js"></script>
     <script src="https://cdn.sheetjs.com/xlsx-0.19.3/package/dist/xlsx.full.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
     <style>
-        /* جميع الأنماط تبقى كما هي */
         :root {
             --primary-orange: #FF7F00;
             --phosphorescent-green: #39FF14;
@@ -873,6 +873,8 @@
     padding-top: 10px;
 }
 
+/* تصميم الطائرة في شاشة الدخول */
+
 @media (max-width: 768px) {
     .receipt-details .data-table th,
     .receipt-details .data-table td {
@@ -965,45 +967,34 @@
         <div class="login-header">
             <img id="loginLogo" src="https://i.postimg.cc/NM2zJWZD/NAIF-LOGO.jpg" alt="شعار الشركة" class="login-logo">
             <div>
-                <div class="login-title" id="loginTitle">نظام إدارة أسطول السيارات</div>
-                <div class="login-company" id="loginCompany">شركة نايف للأغذية</div>
+                <div class="login-title">نظام إدارة أسطول السيارات</div>
+                <div class="login-company">شركة نايف للأغذية</div>
             </div>
         </div>
         
-        <h2 style="text-align: center; color: var(--primary-orange); margin-bottom: 30px;" id="loginFormTitle">تسجيل الدخول</h2>
+                
+        <h2 style="text-align: center; color: var(--primary-orange); margin-bottom: 30px;">تسجيل الدخول</h2>
         <div class="form-group">
-            <label for="username" id="usernameLabel">اسم المستخدم</label>
+            <label for="username">اسم المستخدم</label>
             <input type="text" id="username" placeholder="أدخل اسم المستخدم">
+            <div class="search-results" id="userSearchResults"></div>
         </div>
         <div class="form-group">
-            <label for="password" id="passwordLabel">كلمة المرور</label>
+            <label for="password">كلمة المرور</label>
             <input type="password" id="password" placeholder="أدخل كلمة المرور">
         </div>
         <button class="btn btn-primary" id="loginBtn" style="width: 100%;">دخول</button>
-        
-        <!-- رابط GitHub للبيانات -->
-        <div style="margin-top: 20px; text-align: center;">
-            <small>لتحميل البيانات من GitHub: 
-                <a href="#" id="githubDataLink">
-                    انقر هنا بعد إعداد الرابط
-                </a>
-            </small>
-        </div>
     </div>
 
     <!-- التطبيق الرئيسي -->
     <div id="appScreen" style="display: none;">
-        <div class="language-switcher">
-            <button class="lang-btn" id="langSwitch">English</button>
-        </div>
-
         <div class="container">
             <header>
                 <div class="header-content">
                     <div class="logo-section">
                         <img id="companyLogoHeader" src="" alt="شعار الشركة" class="company-logo-header" style="display: none;">
                         <div>
-                            <div class="logo" id="mainTitle">نظام إدارة أسطول السيارات</div>
+                            <div class="logo">نظام إدارة أسطول السيارات</div>
                             <div id="companyNameHeader" style="font-size: 16px; margin-top: 5px;"></div>
                         </div>
                     </div>
@@ -1016,46 +1007,46 @@
             </header>
 
             <div class="nav-tabs">
-                <div class="nav-tab active" data-target="reports" id="reportsTab">التقارير والإحصائيات</div>
-                <div class="nav-tab" data-target="alerts" id="alertsTab">التنبيهات</div>
-                <div class="nav-tab" data-target="cars-data" id="carsTab">بيانات السيارات</div>
-                <div class="nav-tab" data-target="delivery-receipt" id="deliveryTab">تسليم/استلام السيارات</div>
-                <div class="nav-tab" data-target="car-history" id="historyTab">كشف بيانات السيارة</div>
-                <div class="nav-tab admin-only super-admin-only" data-target="users" id="usersTab">إدارة المستخدمين</div>
-                <div class="nav-tab super-admin-only" data-target="settings" id="settingsTab">الإعدادات</div>
+                <div class="nav-tab active" data-target="reports">التقارير والإحصائيات</div>
+                <div class="nav-tab" data-target="alerts">التنبيهات</div>
+                <div class="nav-tab" data-target="cars-data">بيانات السيارات</div>
+                <div class="nav-tab" data-target="delivery-receipt">تسليم/استلام السيارات</div>
+                <div class="nav-tab" data-target="car-history">كشف بيانات السيارة</div>
+                <div class="nav-tab admin-only super-admin-only" data-target="users">إدارة المستخدمين</div>
+                <div class="nav-tab super-admin-only" data-target="settings">الإعدادات</div>
             </div>
 
             <!-- قسم التقارير والإحصائيات -->
             <section id="reports" class="content-section active">
-                <h2 class="section-title" id="reportsTitle">التقارير والإحصائيات</h2>
+                <h2 class="section-title">التقارير والإحصائيات</h2>
                 
                 <div class="stats-grid">
                     <div class="stat-card">
-                        <h4 id="totalCarsLabel">إجمالي السيارات</h4>
+                        <h4>إجمالي السيارات</h4>
                         <p class="stat-number" id="totalCarsCount">0</p>
                     </div>
                     <div class="stat-card">
-                        <h4 id="activeCarsLabel">السيارات النشطة</h4>
+                        <h4>السيارات النشطة</h4>
                         <p class="stat-number" id="activeCarsCount">0</p>
                     </div>
                     <div class="stat-card">
-                        <h4 id="maintenanceCarsLabel">السيارات تحت الصيانة</h4>
+                        <h4>السيارات تحت الصيانة</h4>
                         <p class="stat-number" id="maintenanceCarsCount">0</p>
                     </div>
                     <div class="stat-card license">
-                        <h4 id="expiringLicensesLabel">تراخيص السيارات المنتهية قريباً</h4>
+                        <h4>تراخيص السيارات المنتهية قريباً</h4>
                         <p class="stat-number" id="expiringLicensesCount">0</p>
                     </div>
                     <div class="stat-card ad-license">
-                        <h4 id="expiringAdLicensesLabel">تراخيص الإعلان المنتهية قريباً</h4>
+                        <h4>تراخيص الإعلان المنتهية قريباً</h4>
                         <p class="stat-number" id="expiringAdLicensesCount">0</p>
                     </div>
                     <div class="stat-card">
-                        <h4 id="activeDeliveriesLabel">عمليات التسليم النشطة</h4>
+                        <h4>عمليات التسليم النشطة</h4>
                         <p class="stat-number" id="activeDeliveriesCount">0</p>
                     </div>
                     <div class="stat-card">
-                        <h4 id="totalRestaurantsLabel">إجمالي المواقع</h4>
+                        <h4>إجمالي المواقع</h4>
                         <p class="stat-number" id="totalRestaurantsCount">0</p>
                     </div>
                 </div>
@@ -1065,7 +1056,6 @@
                     <button class="btn btn-primary" id="yearlyReport">تقرير سنوي</button>
                     <button class="btn btn-primary" id="expiryReport">تقرير بالمواعيد المنتهية</button>
                     <button class="btn btn-secondary" id="exportReport">تصدير التقرير</button>
-                    <button class="btn btn-info" id="syncData">مزامنة البيانات</button>
                 </div>
 
                 <div id="reportResults" style="margin-top: 20px;">
@@ -1075,10 +1065,10 @@
 
             <!-- قسم التنبيهات المفصلة -->
             <section id="alerts" class="content-section">
-                <h2 class="section-title" id="alertsTitle">التنبيهات</h2>
+                <h2 class="section-title">التنبيهات</h2>
                 
                 <div id="licenseAlert" class="alert alert-warning" style="display: none;">
-                    <strong id="alertText">تنبيه:</strong> <span id="alertMessage"></span>
+                    <strong>تنبيه:</strong> <span id="alertMessage"></span>
                 </div>
                 
                 <div class="action-buttons">
@@ -1086,7 +1076,7 @@
                     <button class="btn btn-secondary" id="exportAlerts">تصدير التنبيهات</button>
                 </div>
                 
-                <h3 id="expiringLicensesTableTitle">التراخيص المنتهية</h3>
+                <h3>التراخيص المنتهية</h3>
                 <table class="alerts-table" id="expiringLicensesTable">
                     <thead>
                         <tr>
@@ -1104,25 +1094,25 @@
 
             <!-- قسم بيانات السيارات -->
             <section id="cars-data" class="content-section">
-                <h2 class="section-title" id="carsTitle">بيانات جميع السيارات</h2>
+                <h2 class="section-title">بيانات جميع السيارات</h2>
                 
                 <!-- شريط التنبيهات المختصر -->
                 <div id="alertsBar" class="alerts-bar" style="display: none;">
                     <div class="alerts-count">
                         <div class="alert-item">
-                            <span id="licenseAlertText">تراخيص سيارات منتهية:</span>
+                            <span>تراخيص سيارات منتهية:</span>
                             <span class="alert-badge" id="licenseAlertCount">0</span>
                         </div>
                         <div class="alert-item">
-                            <span id="adLicenseAlertText">تراخيص إعلان منتهية:</span>
+                            <span>تراخيص إعلان منتهية:</span>
                             <span class="alert-badge" id="adLicenseAlertCount">0</span>
                         </div>
                         <div class="alert-item">
-                            <span id="expiredLicenseAlertText">تراخيص سيارات منتهية تماماً:</span>
+                            <span>تراخيص سيارات منتهية تماماً:</span>
                             <span class="alert-badge" id="expiredLicenseAlertCount">0</span>
                         </div>
                         <div class="alert-item">
-                            <span id="expiredAdLicenseAlertText">تراخيص إعلان منتهية تماماً:</span>
+                            <span>تراخيص إعلان منتهية تماماً:</span>
                             <span class="alert-badge" id="expiredAdLicenseAlertCount">0</span>
                         </div>
                     </div>
@@ -1130,11 +1120,10 @@
                 </div>
                 
                 <div class="action-buttons">
-                    <label for="importCarsFile" class="file-input-label" id="importCarsLabel">استيراد بيانات من Excel</label>
+                    <label for="importCarsFile" class="file-input-label">استيراد بيانات من Excel</label>
                     <input type="file" id="importCarsFile" class="file-input" accept=".xlsx, .xls">
                     <button class="btn btn-primary" id="exportTemplate">تحميل نموذج تعبئة البيانات</button>
                     <button class="btn btn-primary" id="addNewCar">إضافة سيارة جديدة</button>
-                    <button class="btn btn-info" id="loadFromGitHub">تحميل من GitHub</button>
                 </div>
                 
                 <div class="search-box">
@@ -1156,8 +1145,9 @@
                             <th>نوع السيارة</th>
                             <th>موديل السيارة</th>
                             <th>سنة الصنع</th>
-                            <th>تاريخ انتهاء الترخيص</th>
+                            <th>تاريخ انتهاء دفتر السيارة</th>
                             <th>تاريخ انتهاء ترخيص الإعلان</th>
+                            <th>تاريخ انتهاء ترخيص البلدية</th>
                             <th>الحالة</th>
                             <th class="no-export">الإجراءات</th>
                         </tr>
@@ -1170,7 +1160,7 @@
 
             <!-- قسم تسليم/استلام السيارات -->
             <section id="delivery-receipt" class="content-section">
-                <h2 class="section-title" id="deliveryTitle">تسليم/استلام السيارات</h2>
+                <h2 class="section-title">تسليم/استلام السيارات</h2>
                 
                 <div class="search-box">
                     <input type="text" id="deliverySearch" placeholder="ابحث برقم السيارة أو اسم السائق...">
@@ -1185,7 +1175,7 @@
                 </div>
                 
                 <div id="deliveryForm" style="display: none; margin-bottom: 20px;">
-                    <h3 id="formTitle">نموذج تسليم/استلام السيارة</h3>
+                    <h3>نموذج تسليم/استلام السيارة</h3>
                     <div class="compact-form">
                         <div class="form-container">
                             <div class="form-group">
@@ -1287,7 +1277,7 @@
             <tr>
                 <th>تاريخ الاستلام</th>
                 <td id="receiptReceiveDate">-</td>
-                <th>ملاحظات</th>
+                                <th>ملاحظات</th>
                 <td id="receiptNotes">-</td>
             </tr>
         </tbody>
@@ -1333,7 +1323,7 @@
 
             <!-- قسم كشف بيانات السيارة -->
             <section id="car-history" class="content-section">
-                <h2 class="section-title" id="historyTitle">كشف بيانات السيارة</h2>
+                <h2 class="section-title">كشف بيانات السيارة</h2>
                 
                 <div class="search-box">
                     <input type="text" id="carHistorySearch" placeholder="ابحث برقم السيارة، اسم السائق، أو الموديل...">
@@ -1353,7 +1343,7 @@
 
             <!-- قسم إدارة المستخدمين -->
             <section id="users" class="content-section">
-                <h2 class="section-title" id="usersTitle">إدارة المستخدمين</h2>
+                <h2 class="section-title">إدارة المستخدمين</h2>
                 
                 <div class="action-buttons">
                     <button class="btn btn-primary" id="addUser">إضافة مستخدم جديد</button>
@@ -1362,12 +1352,12 @@
                 <table class="data-table">
                     <thead>
                         <tr>
-                            <th id="userNameHeader">اسم المستخدم</th>
-                            <th id="emailHeader">البريد الإلكتروني</th>
-                            <th id="userTypeHeader">نوع المستخدم</th>
-                            <th id="creationDateHeader">تاريخ الإنشاء</th>
-                            <th id="statusHeader">الحالة</th>
-                            <th class="no-export" id="actionsHeader">الإجراءات</th>
+                            <th>اسم المستخدم</th>
+                            <th>البريد الإلكتروني</th>
+                            <th>نوع المستخدم</th>
+                            <th>تاريخ الإنشاء</th>
+                            <th>الحالة</th>
+                            <th class="no-export">الإجراءات</th>
                         </tr>
                     </thead>
                     <tbody id="usersTableBody">
@@ -1378,38 +1368,15 @@
 
             <!-- قسم الإعدادات -->
             <section id="settings" class="content-section">
-                <h2 class="section-title" id="settingsTitle">الإعدادات</h2>
+                <h2 class="section-title">الإعدادات</h2>
                 
                 <div class="action-buttons">
-                    <label for="importRestaurantsFile" class="file-input-label" id="importRestaurantsLabel">استيراد المواقع من Excel</label>
+                    <label for="importRestaurantsFile" class="file-input-label">استيراد المواقع من Excel</label>
                     <input type="file" id="importRestaurantsFile" class="file-input" accept=".xlsx, .xls">
                     <button class="btn btn-primary" id="addRestaurant">إضافة موقع جديد</button>
                 </div>
                 
-                <h3>إعدادات قاعدة البيانات (GitHub)</h3>
-                <div class="form-group">
-                    <label for="githubDataUrl">رابط بيانات GitHub (Raw JSON)</label>
-                    <input type="text" id="githubDataUrl" placeholder="أدخل رابط raw JSON من GitHub">
-                    <small>يجب أن يكون الرابط من raw.githubusercontent.com</small>
-                </div>
-                <button class="btn btn-primary" id="saveGitHubUrl">حفظ رابط البيانات</button>
-                <button class="btn btn-secondary" id="exportToGitHub">تصدير البيانات للتحميل</button>
-                <button class="btn btn-info" id="syncWithGitHub">مزامنة مع GitHub</button>
-                
-                <!-- إضافة قسم GitHub Token هنا -->
-                <h3 style="margin-top: 30px;">إعدادات GitHub Token</h3>
-                <div class="form-group">
-                    <label for="githubToken">GitHub Token (للتصدير)</label>
-                    <input type="password" id="githubToken" placeholder="أدخل GitHub Token الخاص بك">
-                    <small>
-                        <a href="https://github.com/settings/tokens" target="_blank">أنشئ توكن هنا</a> 
-                        مع صلاحيات <code>repo</code>
-                    </small>
-                </div>
-                <button class="btn btn-primary" id="saveGitHubToken">حفظ التوكن</button>
-                <button class="btn btn-warning" id="exportToGitHubBtn">تصدير البيانات إلى GitHub</button>
-                
-                <h3 style="margin-top: 30px;">إعدادات الشركة</h3>
+                <h3>إعدادات الشركة</h3>
                 <div class="form-group">
                     <label for="companyName">اسم الشركة</label>
                     <input type="text" id="companyName" placeholder="أدخل اسم الشركة">
@@ -1450,33 +1417,37 @@
     <div id="carModal" class="modal">
         <div class="modal-content">
             <span class="close-modal" id="closeCarModal">&times;</span>
-            <h2 id="carModalTitle">إضافة سيارة جديدة</h2>
+            <h2>إضافة سيارة جديدة</h2>
             <div class="form-group">
-                <label for="newCarNumber" id="newCarNumberLabel">رقم السيارة *</label>
+                <label for="newCarNumber">رقم السيارة *</label>
                 <input type="text" id="newCarNumber" placeholder="أدخل رقم السيارة">
             </div>
             <div class="form-group">
-                <label for="newCarType" id="newCarTypeLabel">نوع السيارة *</label>
+                <label for="newCarType">نوع السيارة *</label>
                 <input type="text" id="newCarType" placeholder="أدخل نوع السيارة">
             </div>
             <div class="form-group">
-                <label for="newCarModel" id="newCarModelLabel">موديل السيارة *</label>
+                <label for="newCarModel">موديل السيارة *</label>
                 <input type="text" id="newCarModel" placeholder="أدخل موديل السيارة">
             </div>
             <div class="form-group">
-                <label for="newCarYear" id="newCarYearLabel">سنة الصنع *</label>
+                <label for="newCarYear">سنة الصنع *</label>
                 <input type="number" id="newCarYear" placeholder="أدخل سنة الصنع">
             </div>
             <div class="form-group">
-                <label for="newLicenseExpiry" id="newLicenseExpiryLabel">تاريخ انتهاء الترخيص *</label>
+                <label for="newLicenseExpiry">تاريخ انتهاء دفتر السيارة *</label>
                 <input type="date" id="newLicenseExpiry">
             </div>
             <div class="form-group">
-                <label for="newAdLicenseExpiry" id="newAdLicenseExpiryLabel">تاريخ انتهاء ترخيص الإعلان</label>
+                <label for="newAdLicenseExpiry">تاريخ انتهاء ترخيص الإعلان</label>
                 <input type="date" id="newAdLicenseExpiry">
             </div>
             <div class="form-group">
-                <label for="newCarStatus" id="newCarStatusLabel">الحالة</label>
+                <label for="newMunicipalityLicenseExpiry">تاريخ انتهاء ترخيص البلدية</label>
+                <input type="date" id="newMunicipalityLicenseExpiry">
+            </div>
+            <div class="form-group">
+                <label for="newCarStatus">الحالة</label>
                 <select id="newCarStatus">
                     <option value="نشطة">نشطة</option>
                     <option value="تحت الصيانة">تحت الصيانة</option>
@@ -1494,22 +1465,22 @@
     <div id="userModal" class="modal">
         <div class="modal-content">
             <span class="close-modal" id="closeUserModal">&times;</span>
-            <h2 id="userModalTitle">إضافة مستخدم جديد</h2>
+            <h2>إضافة مستخدم جديد</h2>
             <div class="form-group">
-                <label for="newUserName" id="newUserNameLabel">اسم المستخدم</label>
+                <label for="newUserName">اسم المستخدم</label>
                 <input type="text" id="newUserName" placeholder="أدخل اسم المستخدم">
             </div>
             <div class="form-group">
-                <label for="newUserEmail" id="newUserEmailLabel">البريد الإلكتروني</label>
+                <label for="newUserEmail">البريد الإلكتروني</label>
                 <input type="email" id="newUserEmail" placeholder="أدخل البريد الإلكتروني">
             </div>
             <div class="form-group">
-                <label for="newUserPassword" id="newUserPasswordLabel">كلمة المرور</label>
+                <label for="newUserPassword">كلمة المرور</label>
                 <input type="password" id="newUserPassword" placeholder="أدخل كلمة المرور">
             </div>
             <div class="form-group">
-                <label for="newUserRole" id="newUserRoleLabel">نوع المستخدم</label>
-                                <select id="newUserRole">
+                <label for="newUserRole">نوع المستخدم</label>
+                <select id="newUserRole">
                     <option value="data_entry">مدخل بيانات</option>
                     <option value="admin">أدمن</option>
                     <option value="super_admin">سوبر أدمن</option>
@@ -1526,20 +1497,20 @@
     <div id="restaurantModal" class="modal">
         <div class="modal-content">
             <span class="close-modal" id="closeRestaurantModal">&times;</span>
-            <h2 id="restaurantModalTitle">إضافة موقع جديد</h2>
+            <h2>إضافة موقع جديد</h2>
             <div class="form-group">
-                <label for="newRestaurantName" id="newRestaurantNameLabel">اسم الموقع</label>
+                <label for="newRestaurantName">اسم الموقع</label>
                 <input type="text" id="newRestaurantName" placeholder="أدخل اسم الموقع">
             </div>
             <div class="form-group">
-                <label for="newRestaurantType" id="newRestaurantTypeLabel">نوع الموقع</label>
+                <label for="newRestaurantType">نوع الموقع</label>
                 <select id="newRestaurantType">
                     <option value="مطعم">مطعم</option>
                     <option value="مخزن">مخزن</option>
                 </select>
             </div>
             <div class="form-group">
-                <label for="newRestaurantAddress" id="newRestaurantAddressLabel">العنوان</label>
+                <label for="newRestaurantAddress">العنوان</label>
                 <input type="text" id="newRestaurantAddress" placeholder="أدخل العنوان">
             </div>
             <div class="action-buttons">
@@ -1550,50 +1521,41 @@
     </div>
 
     <script>
-        // بيانات GitHub
-        let GITHUB_DATA_URL = 'https://raw.githubusercontent.com/yasser-q8/car-fleet-system/refs/heads/main/data.json';
-        
-        // البيانات الافتراضية
-        const sampleCars = [];
-        const sampleRestaurants = [];
-        const sampleDeliveries = [];
-        
-        // بيانات المستخدمين الافتراضية - معدلة ومؤكدة
-const sampleUsers = [
-    { 
-        id: 1, 
-        username: "Naif", 
-        email: "naif@naif.com", 
-        password: "123", 
-        role: "data_entry", 
-        created: "2025-11-30", 
-        status: "نشط" 
-    },
-    { 
-        id: 2, 
-        username: "Ibrahim", 
-        email: "ibrahim@naif.com", 
-        password: "123", 
-        role: "admin", 
-        created: "2025-11-30", 
-        status: "نشط" 
-    },
-    { 
-        id: 3, 
-        username: "Yasser", 
-        email: "yasser@naif.com", 
-        password: "123", 
-        role: "super_admin", 
-        created: "2025-11-30", 
-        status: "نشط" 
-    }
-];
+        // بيانات المستخدمين الافتراضية
+        const sampleUsers = [
+            { 
+                id: 1, 
+                username: "نايف", 
+                email: "naif@naif.com", 
+                password: "123", 
+                role: "data_entry", 
+                created: "2026-1-11", 
+                status: "نشط" 
+            },
+            { 
+                id: 2, 
+                username: "Ibrahim", 
+                email: "ibrahim@naif.com", 
+                password: "506070", 
+                role: "admin", 
+                   created: "2026-1-11", 
+                status: "نشط" 
+            },
+            { 
+                id: 3, 
+                username: "Yasser", 
+                email: "yasser@naif.com", 
+                password: "123321", 
+                role: "super_admin", 
+                    created: "2026-1-11", 
+                status: "نشط" 
+            }
+        ];
 
         // حالة التطبيق
-        let currentLanguage = 'ar';
-        let carsData = JSON.parse(localStorage.getItem('carsData')) || [...sampleCars];
-        let deliveriesData = JSON.parse(localStorage.getItem('deliveriesData')) || [...sampleDeliveries];
-        let restaurantsData = JSON.parse(localStorage.getItem('restaurantsData')) || [...sampleRestaurants];
+        let carsData = JSON.parse(localStorage.getItem('carsData')) || [];
+        let deliveriesData = JSON.parse(localStorage.getItem('deliveriesData')) || [];
+        let restaurantsData = JSON.parse(localStorage.getItem('restaurantsData')) || [];
         let usersData = JSON.parse(localStorage.getItem('usersData')) || [...sampleUsers];
         let currentUser = null;
         let currentSort = { field: 'licenseExpiry', order: 'asc' };
@@ -1603,577 +1565,20 @@ const sampleUsers = [
         let editingRestaurantId = null;
         let scratches = [];
 
-// ========== نظام المزامنة مع GitHub ==========
-
-// دالة محسنة لتحميل البيانات من GitHub
-async function loadDataFromGitHub() {
-    if (!GITHUB_DATA_URL) {
-        console.log('⚠️ لم يتم تعيين رابط GitHub');
-        return false;
-    }
-
-    try {
-        console.log('📥 جاري تحميل البيانات من GitHub...');
-
-        const response = await fetch(GITHUB_DATA_URL);
-        if (!response.ok) {
-            throw new Error(`فشل التحميل: ${response.status}`);
-        }
-
-        const remoteData = await response.json();
-        
-        // ✅ التحقق من وجود بيانات حقيقية في GitHub
-        if (!remoteData || Object.keys(remoteData).length === 0) {
-            console.log('📭 بيانات GitHub فارغة - تجاهل المزامنة');
-            return false;
-        }
-
-        let hasChanges = false;
-
-        // 🔄 دمج البيانات بدلاً من الاستبدال الكامل
-        // 1. دمج السيارات
-        if (remoteData.carsData && remoteData.carsData.length > 0) {
-            const newCars = remoteData.carsData.filter(remoteCar => 
-                !carsData.some(localCar => localCar.number === remoteCar.number)
-            );
-            if (newCars.length > 0) {
-                carsData = [...carsData, ...newCars];
-                hasChanges = true;
-                console.log(`✅ تم إضافة ${newCars.length} سيارة جديدة`);
+        // دالة لحفظ جميع البيانات في التخزين المحلي
+        function saveAllData() {
+            try {
+                localStorage.setItem('carsData', JSON.stringify(carsData));
+                localStorage.setItem('deliveriesData', JSON.stringify(deliveriesData));
+                localStorage.setItem('restaurantsData', JSON.stringify(restaurantsData));
+                localStorage.setItem('usersData', JSON.stringify(usersData));
+                
+                console.log('💾 تم حفظ جميع البيانات في التخزين المحلي');
+                
+            } catch (error) {
+                console.error('❌ خطأ في حفظ البيانات:', error);
             }
         }
-
-        // 2. دمج المطاعم
-        if (remoteData.restaurantsData && remoteData.restaurantsData.length > 0) {
-            const newRestaurants = remoteData.restaurantsData.filter(remoteRest => 
-                !restaurantsData.some(localRest => localRest.name === remoteRest.name)
-            );
-            if (newRestaurants.length > 0) {
-                restaurantsData = [...restaurantsData, ...newRestaurants];
-                hasChanges = true;
-                console.log(`✅ تم إضافة ${newRestaurants.length} مطعم جديد`);
-            }
-        }
-
-        // 3. دمج المستخدمين
-        if (remoteData.usersData && remoteData.usersData.length > 0) {
-            const newUsers = remoteData.usersData.filter(remoteUser => 
-                !usersData.some(localUser => localUser.username === remoteUser.username)
-            );
-            if (newUsers.length > 0) {
-                usersData = [...usersData, ...newUsers];
-                hasChanges = true;
-                console.log(`✅ تم إضافة ${newUsers.length} مستخدم جديد`);
-            }
-        }
-
-        if (hasChanges) {
-            saveAllData();
-            loadAllData();
-            console.log('✅ تم دمج البيانات بنجاح');
-            showSyncNotification('تم دمج البيانات الجديدة', 'success');
-        } else {
-            console.log('ℹ️ لا توجد بيانات جديدة للمزامنة');
-        }
-
-        return true;
-
-    } catch (error) {
-        console.error('❌ خطأ في تحميل البيانات:', error);
-        return false;
-    }
-}
-
-// ========== نظام التصدير إلى GitHub ==========
-
-// دالة لتصدير البيانات إلى GitHub (يتطلب GitHub Token)
-async function pushToGitHub() {
-    if (!currentUser || currentUser.role !== 'super_admin') {
-        console.log('⛔ صلاحية غير كافية للتصدير إلى GitHub');
-        alert('هذه الميزة متاحة فقط للسوبر أدمن');
-        return;
-    }
-    
-    try {
-        // 🔒 جلب التوكن من localStorage (يجب تخزينه يدوياً أولاً)
-        const githubToken = localStorage.getItem('githubToken');
-        if (!githubToken) {
-            alert('❌ لم يتم إعداد GitHub Token. يرجى إضافته في الإعدادات أولاً.');
-            return;
-        }
-        
-        const repoOwner = 'yasser-q8'; // اسم حسابك
-        const repoName = 'car-fleet-system'; // اسم المستودع
-        const filePath = 'data.json'; // المسار داخل المستودع
-        
-        // 📦 تجميع البيانات للتصدير
-        const dataToPush = {
-            carsData: carsData,
-            deliveriesData: deliveriesData,
-            restaurantsData: restaurantsData,
-            usersData: usersData,
-            lastUpdate: new Date().toISOString()
-        };
-        
-        console.log('🚀 بدء التصدير إلى GitHub...');
-        
-        // 1. الحصول على معلومات الملف الحالي
-        const getFileUrl = `https://api.github.com/repos/${repoOwner}/${repoName}/contents/${filePath}`;
-        const getResponse = await fetch(getFileUrl, {
-            headers: {
-                'Authorization': `token ${githubToken}`,
-                'Accept': 'application/vnd.github.v3+json'
-            }
-        });
-        
-        let sha = null;
-        if (getResponse.ok) {
-            const fileInfo = await getResponse.json();
-            sha = fileInfo.sha; // SHA ضروري لتحديث الملف
-        }
-        
-        // 2. تحويل البيانات إلى Base64
-        const content = JSON.stringify(dataToPush, null, 2);
-        const contentBase64 = btoa(unescape(encodeURIComponent(content)));
-        
-        // 3. إنشاء أو تحديث الملف
-        const updateUrl = `https://api.github.com/repos/${repoOwner}/${repoName}/contents/${filePath}`;
-        const payload = {
-            message: `Auto-sync: ${new Date().toISOString()}`,
-            content: contentBase64,
-            sha: sha, // إذا كان null، سيتم إنشاء ملف جديد
-            branch: 'main'
-        };
-        
-        const updateResponse = await fetch(updateUrl, {
-            method: 'PUT',
-            headers: {
-                'Authorization': `token ${githubToken}`,
-                'Content-Type': 'application/json',
-                'Accept': 'application/vnd.github.v3+json'
-            },
-            body: JSON.stringify(payload)
-        });
-        
-        if (updateResponse.ok) {
-            console.log('✅ تم تصدير البيانات إلى GitHub بنجاح');
-            showSyncNotification('تم التصدير إلى GitHub بنجاح', 'success');
-            
-            // تحديث وقت آخر مزامنة
-            localStorage.setItem('lastSyncToGitHub', new Date().toISOString());
-            return true;
-        } else {
-            const errorData = await updateResponse.json();
-            console.error('❌ فشل التصدير:', errorData);
-            showSyncNotification(`فشل التصدير: ${errorData.message || 'خطأ غير معروف'}`, 'error');
-            return false;
-        }
-        
-    } catch (error) {
-        console.error('❌ خطأ في التصدير إلى GitHub:', error);
-        showSyncNotification('خطأ في التصدير إلى GitHub', 'error');
-        return false;
-    }
-}
-
-// دالة مبسطة للتصدير بدون GitHub Token (للتحميل فقط)
-function exportDataForGitHub() {
-    const dataToSave = {
-        carsData: carsData,
-        deliveriesData: deliveriesData,
-        restaurantsData: restaurantsData,
-        usersData: usersData,
-        lastUpdate: new Date().toISOString()
-    };
-
-    const dataStr = JSON.stringify(dataToSave, null, 2);
-    const dataBlob = new Blob([dataStr], { type: 'application/json' });
-    
-    // إنشاء رابط تحميل
-    const downloadLink = document.createElement('a');
-    downloadLink.download = 'fleet_data.json';
-    downloadLink.href = URL.createObjectURL(dataBlob);
-    downloadLink.click();
-    
-    console.log('✅ تم تصدير البيانات للتحميل');
-    showSyncNotification('تم تصدير البيانات للتحميل', 'success');
-}
-
-// دالة للمزامنة مع GitHub
-async function syncWithGitHub() {
-    if (!currentUser) {
-        console.log('⏸️ توقف المزامنة - لا يوجد مستخدم مسجل دخول');
-        return;
-    }
-    
-    try {
-        console.log('🔃 بدء المزامنة مع GitHub...');
-        
-        // 1. استيراد التحديثات من GitHub
-        const imported = await loadDataFromGitHub();
-        
-        // 2. تصدير التحديثات إلى GitHub (فقط للسوبر أدمن مع توكن)
-        const githubToken = localStorage.getItem('githubToken');
-        if (imported && githubToken && currentUser.role === 'super_admin') {
-            await pushToGitHub();
-        }
-        
-        console.log('✅ تمت المزامنة مع GitHub بنجاح');
-        
-    } catch (error) {
-        console.error('❌ فشل في المزامنة مع GitHub:', error);
-        showSyncNotification('فشل في المزامنة مع GitHub', 'error');
-    }
-}
-
-// دالة لبدء المزامنة التلقائية الدورية
-function startAutoSync() {
-    // المزامنة كل 5 دقائق (300000 مللي ثانية)
-    const SYNC_INTERVAL = 300000;
-    
-    // لا تبدأ المزامنة إلا بعد تسجيل الدخول
-    console.log('⏳ المزامنة التلقائية بانتظار تسجيل الدخول...');
-    
-    // المزامنة الدورية بعد تسجيل الدخول فقط
-    setInterval(() => {
-        if (currentUser) {
-            // 1. أولاً استورد التحديثات من GitHub
-            loadDataFromGitHub().then(updated => {
-                if (updated) {
-                    // 2. إذا كانت هناك تحديثات، صدّر البيانات المحلية (مدمجة)
-                    const githubToken = localStorage.getItem('githubToken');
-                    if (githubToken && currentUser.role === 'super_admin') {
-                        // انتظر 2 ثانية ثم صدّر
-                        setTimeout(() => {
-                            pushToGitHub();
-                        }, 2000);
-                    }
-                }
-            });
-        }
-    }, SYNC_INTERVAL);
-}
-
-// دالة لحفظ GitHub Token
-function saveGitHubToken() {
-    const token = document.getElementById('githubToken').value.trim();
-    if (token) {
-        localStorage.setItem('githubToken', token);
-        alert(currentLanguage === 'ar' ? 'تم حفظ GitHub Token بنجاح' : 'GitHub Token saved successfully');
-        document.getElementById('githubToken').value = ''; // مسح الحقل لأمان إضافي
-        document.getElementById('githubToken').placeholder = 'تم تخزين التوكن (******)';
-    } else {
-        alert(currentLanguage === 'ar' ? 'يرجى إدخال التوكن' : 'Please enter the token');
-    }
-}
-
-// دالة لعرض إشعارات المزامنة
-function showSyncNotification(message, type) {
-    // إنشاء عنصر الإشعار إذا لم يكن موجوداً
-    let notification = document.getElementById('syncNotification');
-    if (!notification) {
-        notification = document.createElement('div');
-        notification.id = 'syncNotification';
-        notification.style.cssText = `
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            padding: 15px 20px;
-            border-radius: 8px;
-            color: white;
-            font-weight: bold;
-            z-index: 10000;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-            max-width: 300px;
-            text-align: center;
-        `;
-        document.body.appendChild(notification);
-    }
-    
-    // تحديد لون الإشعار حسب النوع
-    if (type === 'success') {
-        notification.style.backgroundColor = '#2ecc71';
-    } else if (type === 'error') {
-        notification.style.backgroundColor = '#e74c3c';
-    } else {
-        notification.style.backgroundColor = '#3498db';
-    }
-    
-    notification.textContent = message;
-    notification.style.display = 'block';
-    notification.style.opacity = '1';
-    
-    // إخفاء الإشعار بعد 3 ثوان
-    setTimeout(() => {
-        notification.style.opacity = '0';
-        setTimeout(() => {
-            notification.style.display = 'none';
-        }, 300);
-    }, 3000);
-}
-
-// دالة لحفظ جميع البيانات في التخزين المحلي
-function saveAllData() {
-    try {
-        localStorage.setItem('carsData', JSON.stringify(carsData));
-        localStorage.setItem('deliveriesData', JSON.stringify(deliveriesData));
-        localStorage.setItem('restaurantsData', JSON.stringify(restaurantsData));
-        localStorage.setItem('usersData', JSON.stringify(usersData));
-        
-        console.log('💾 تم حفظ جميع البيانات في التخزين المحلي');
-        
-    } catch (error) {
-        console.error('❌ خطأ في حفظ البيانات:', error);
-    }
-}
-
-// دالة لحفظ رابط GitHub
-function saveGitHubUrl() {
-    const url = document.getElementById('githubDataUrl').value.trim();
-    if (url) {
-        localStorage.setItem('githubDataUrl', url);
-        GITHUB_DATA_URL = url;
-        alert(currentLanguage === 'ar' ? 'تم حفظ رابط البيانات بنجاح' : 'Data URL saved successfully');
-        
-        // تحديث رابط GitHub في شاشة الدخول
-        document.getElementById('githubDataLink').href = url;
-    } else {
-        alert(currentLanguage === 'ar' ? 'يرجى إدخال رابط صالح' : 'Please enter a valid URL');
-    }
-}
-
-        // النصوص باللغتين
-        const translations = {
-            ar: {
-                mainTitle: "نظام إدارة أسطول السيارات",
-                reportsTab: "التقارير والإحصائيات",
-                alertsTab: "التنبيهات",
-                carsTab: "بيانات السيارات",
-                deliveryTab: "تسليم/استلام السيارات",
-                historyTab: "كشف بيانات السيارة",
-                usersTab: "إدارة المستخدمين",
-                settingsTab: "الإعدادات",
-                reportsTitle: "التقارير والإحصائيات",
-                alertsTitle: "التنبيهات",
-                carsTitle: "بيانات جميع السيارات",
-                deliveryTitle: "تسليم/استلام السيارات",
-                historyTitle: "كشف بيانات السيارة",
-                usersTitle: "إدارة المستخدمين",
-                settingsTitle: "الإعدادات",
-                alertText: "تنبيه:",
-                alertMessage: "هناك 3 سيارات على وشك انتهاء الترخيص خلال الشهر القادم",
-                formTitle: "نموذج تسليم/استلام السيارة",
-                overviewTitle: "نظرة عامة على الأسطول",
-                totalCarsLabel: "إجمالي السيارات",
-                activeCarsLabel: "السيارات النشطة",
-                maintenanceCarsLabel: "السيارات تحت الصيانة",
-                expiringLicensesLabel: "تراخيص السيارات المنتهية قريباً",
-                expiringAdLicensesLabel: "تراخيص الإعلان المنتهية قريباً",
-                activeDeliveriesLabel: "عمليات التسليم النشطة",
-                totalRestaurantsLabel: "إجمالي المواقع",
-                userNameHeader: "اسم المستخدم",
-                emailHeader: "البريد الإلكتروني",
-                userTypeHeader: "نوع المستخدم",
-                creationDateHeader: "تاريخ الإنشاء",
-                statusHeader: "الحالة",
-                actionsHeader: "الإجراءات",
-                loginTitle: "نظام إدارة أسطول السيارات",
-                loginCompany: "شركة نايف للأغذية",
-                loginFormTitle: "تسجيل الدخول",
-                usernameLabel: "اسم المستخدم",
-                passwordLabel: "كلمة المرور",
-                loginBtn: "دخول",
-                logoutBtn: "تسجيل خروج",
-                showDeliveryForm: "تسجيل استلام/تسليم جديد",
-                showReceiptForm: "نموذج استلام السيارة",
-                print: "طباعة",
-                exportPDF: "تصدير PDF",
-                exportExcel: "تصدير Excel",
-                save: "حفظ",
-                cancel: "إلغاء",
-                importCars: "استيراد بيانات من Excel",
-                exportTemplate: "تحميل نموذج تعبئة البيانات",
-                addNewCar: "إضافة سيارة جديدة",
-                sortByLicense: "ترتيب حسب انتهاء الترخيص",
-                sortByAdLicense: "ترتيب حسب ترخيص الإعلان",
-                printCarsTable: "طباعة الجدول",
-                monthlyReport: "تقرير شهري",
-                yearlyReport: "تقرير سنوي",
-                expiryReport: "تقرير بالمواعيد المنتهية",
-                exportReport: "تصدير التقرير",
-                refreshAlerts: "تحديث التنبيهات",
-                exportAlerts: "تصدير التنبيهات",
-                expiringLicensesTableTitle: "التراخيص المنتهية",
-                addUser: "إضافة مستخدم جديد",
-                importRestaurants: "استيراد المواقع من Excel",
-                addRestaurant: "إضافة موقع جديد",
-                saveCompanySettings: "حفظ إعدادات الشركة",
-                carModalTitle: "إضافة سيارة جديدة",
-                userModalTitle: "إضافة مستخدم جديد",
-                restaurantModalTitle: "إضافة موقع جديد",
-                edit: "تعديل",
-                delete: "حذف",
-                completeDelivery: "إتمام التسليم",
-                carSearchPlaceholder: "ابحث برقم السيارة...",
-                deliverySearchPlaceholder: "ابحث برقم السيارة أو اسم السائق...",
-                carHistorySearchPlaceholder: "ابحث برقم السيارة، اسم السائق، أو الموديل...",
-                carNumberPlaceholder: "ابحث واختر رقم السيارة",
-                restaurantNamePlaceholder: "ابحث واختر المطعم",
-                driverNamePlaceholder: "أدخل اسم السائق",
-                phoneNumberPlaceholder: "أدخل رقم الموبايل",
-                notesPlaceholder: "أدخل أي ملاحظات على حالة السيارة",
-                newCarNumberPlaceholder: "أدخل رقم السيارة",
-                newCarTypePlaceholder: "أدخل نوع السيارة",
-                newCarModelPlaceholder: "أدخل موديل السيارة",
-                newCarYearPlaceholder: "أدخل سنة الصنع",
-                newCarNumberLabel: "رقم السيارة",
-                newCarTypeLabel: "نوع السيارة",
-                newCarModelLabel: "موديل السيارة",
-                newCarYearLabel: "سنة الصنع",
-                newLicenseExpiryLabel: "تاريخ انتهاء الترخيص",
-                newAdLicenseExpiryLabel: "تاريخ انتهاء ترخيص الإعلان",
-                newCarStatusLabel: "الحالة",
-                companyNamePlaceholder: "أدخل اسم الشركة",
-                companyLogoPlaceholder: "أدخل رابط الشعار",
-                companyAddressPlaceholder: "أدخل عنوان الشركة",
-                companyInfoPlaceholder: "أدخل معلومات الشركة",
-                newUserNamePlaceholder: "أدخل اسم المستخدم",
-                newUserEmailPlaceholder: "أدخل البريد الإلكتروني",
-                newUserPasswordPlaceholder: "أدخل كلمة المرور",
-                newUserNameLabel: "اسم المستخدم",
-                newUserEmailLabel: "البريد الإلكتروني",
-                newUserPasswordLabel: "كلمة المرور",
-                newUserRoleLabel: "نوع المستخدم",
-                newRestaurantNamePlaceholder: "أدخل اسم الموقع",
-                newRestaurantAddressPlaceholder: "أدخل العنوان",
-                newRestaurantNameLabel: "اسم الموقع",
-                newRestaurantTypeLabel: "نوع الموقع",
-                newRestaurantAddressLabel: "العنوان",
-                licenseAlertText: "تراخيص سيارات منتهية:",
-                adLicenseAlertText: "تراخيص إعلان منتهية:",
-                expiredLicenseAlertText: "تراخيص سيارات منتهية تماماً:",
-                expiredAdLicenseAlertText: "تراخيص إعلان منتهية تماماً:",
-                viewAlertsBtn: "عرض التنبيهات التفصيلية",
-                printReceiptBtn: "طباعة النموذج",
-                syncData: "مزامنة البيانات",
-                loadFromGitHub: "تحميل من GitHub"
-            },
-            en: {
-                mainTitle: "Car Fleet Management System",
-                reportsTab: "Reports and Statistics",
-                alertsTab: "Alerts",
-                carsTab: "Cars Data",
-                deliveryTab: "Car Delivery/Receipt",
-                historyTab: "Car Data Report",
-                usersTab: "Users Management",
-                settingsTab: "Settings",
-                reportsTitle: "Reports and Statistics",
-                alertsTitle: "Alerts",
-                carsTitle: "All Cars Data",
-                deliveryTitle: "Car Delivery/Receipt",
-                historyTitle: "Car Data Report",
-                usersTitle: "Users Management",
-                settingsTitle: "Settings",
-                alertText: "Alert:",
-                alertMessage: "There are 3 cars with licenses expiring next month",
-                formTitle: "Car Delivery/Receipt Form",
-                overviewTitle: "Fleet Overview",
-                totalCarsLabel: "Total Cars",
-                activeCarsLabel: "Active Cars",
-                maintenanceCarsLabel: "Cars Under Maintenance",
-                expiringLicensesLabel: "Car Licenses Expiring Soon",
-                expiringAdLicensesLabel: "Ad Licenses Expiring Soon",
-                activeDeliveriesLabel: "Active Deliveries",
-                totalRestaurantsLabel: "Total Locations",
-                userNameHeader: "Username",
-                emailHeader: "Email",
-                userTypeHeader: "User Type",
-                creationDateHeader: "Creation Date",
-                statusHeader: "Status",
-                actionsHeader: "Actions",
-                loginTitle: "Car Fleet Management System",
-                loginCompany: "Naif Food Company",
-                loginFormTitle: "Login",
-                usernameLabel: "Username",
-                passwordLabel: "Password",
-                loginBtn: "Login",
-                logoutBtn: "Logout",
-                showDeliveryForm: "New Delivery/Receipt",
-                showReceiptForm: "Car Receipt Form",
-                print: "Print",
-                exportPDF: "Export PDF",
-                exportExcel: "Export Excel",
-                save: "Save",
-                cancel: "Cancel",
-                importCars: "Import from Excel",
-                exportTemplate: "Download Template",
-                addNewCar: "Add New Car",
-                sortByLicense: "Sort by License Expiry",
-                sortByAdLicense: "Sort by Ad License Expiry",
-                printCarsTable: "Print Table",
-                monthlyReport: "Monthly Report",
-                yearlyReport: "Yearly Report",
-                expiryReport: "Expiry Report",
-                exportReport: "Export Report",
-                refreshAlerts: "Refresh Alerts",
-                exportAlerts: "Export Alerts",
-                expiringLicensesTableTitle: "Expired Licenses",
-                addUser: "Add New User",
-                importRestaurants: "Import Locations from Excel",
-                addRestaurant: "Add New Location",
-                saveCompanySettings: "Save Company Settings",
-                carModalTitle: "Add New Car",
-                userModalTitle: "Add New User",
-                restaurantModalTitle: "Add New Location",
-                edit: "Edit",
-                delete: "Delete",
-                completeDelivery: "Complete Delivery",
-                carSearchPlaceholder: "Search by car number...",
-                deliverySearchPlaceholder: "Search by car number or driver name...",
-                carHistorySearchPlaceholder: "Search by car number, driver name, or model...",
-                carNumberPlaceholder: "Search and select car number",
-                restaurantNamePlaceholder: "Search and select restaurant",
-                driverNamePlaceholder: "Enter driver name",
-                phoneNumberPlaceholder: "Enter phone number",
-                notesPlaceholder: "Enter any notes about car condition",
-                newCarNumberPlaceholder: "Enter car number",
-                newCarTypePlaceholder: "Enter car type",
-                newCarModelPlaceholder: "Enter car model",
-                newCarYearPlaceholder: "Enter manufacturing year",
-                newCarNumberLabel: "Car Number",
-                newCarTypeLabel: "Car Type",
-                newCarModelLabel: "Car Model",
-                newCarYearLabel: "Manufacturing Year",
-                newLicenseExpiryLabel: "License Expiry Date",
-                newAdLicenseExpiryLabel: "Ad License Expiry Date",
-                newCarStatusLabel: "Status",
-                companyNamePlaceholder: "Enter company name",
-                companyLogoPlaceholder: "Enter logo URL",
-                companyAddressPlaceholder: "Enter company address",
-                companyInfoPlaceholder: "Enter company information",
-                newUserNamePlaceholder: "Enter username",
-                newUserEmailPlaceholder: "Enter email",
-                newUserPasswordPlaceholder: "Enter password",
-                newUserNameLabel: "Username",
-                newUserEmailLabel: "Email",
-                newUserPasswordLabel: "Password",
-                newUserRoleLabel: "User Type",
-                newRestaurantNamePlaceholder: "Enter location name",
-                newRestaurantAddressPlaceholder: "Enter address",
-                newRestaurantNameLabel: "Location Name",
-                newRestaurantTypeLabel: "Location Type",
-                newRestaurantAddressLabel: "Address",
-                licenseAlertText: "Car licenses expiring:",
-                adLicenseAlertText: "Ad licenses expiring:",
-                expiredLicenseAlertText: "Expired car licenses:",
-                expiredAdLicenseAlertText: "Expired ad licenses:",
-                viewAlertsBtn: "View Detailed Alerts",
-                printReceiptBtn: "Print Receipt",
-                syncData: "Sync Data",
-                loadFromGitHub: "Load from GitHub"
-            }
-        };
 
         // تهيئة التطبيق
         document.addEventListener('DOMContentLoaded', function() {
@@ -2181,60 +1586,31 @@ function saveGitHubUrl() {
         });
 
         function initializeApp() {
-    // تهيئة بيانات المستخدمين إذا لم تكن موجودة
-    // ⭐⭐ الكود الجديد: تحميل تلقائي من GitHub
-    GITHUB_DATA_URL = 'https://raw.githubusercontent.com/yasser-q8/car-fleet-system/refs/heads/main/data.json';
-    
-    // محاولة تحميل البيانات تلقائياً بعد 3 ثوان
-    setTimeout(() => {
-        if (!currentUser) return;
-        console.log('🔄 تحميل تلقائي من GitHub...');
-        loadDataFromGitHub().catch(error => {
-            console.log('⚠️ فشل التحميل التلقائي، استخدام البيانات المحلية');
-        });
-    }, 3000);
-    
-    if (!localStorage.getItem('usersData') || JSON.parse(localStorage.getItem('usersData')).length === 0) {
-        localStorage.setItem('usersData', JSON.stringify(sampleUsers));
-    }
-    
-    // تحميل إعدادات GitHub
-    const savedGitHubUrl = localStorage.getItem('githubDataUrl');
-    if (savedGitHubUrl) {
-        GITHUB_DATA_URL = savedGitHubUrl;
-        document.getElementById('githubDataUrl').value = savedGitHubUrl;
-        document.getElementById('githubDataLink').href = savedGitHubUrl;
-    }
-    
-    // تحميل GitHub Token المحفوظ
-    const savedToken = localStorage.getItem('githubToken');
-    if (savedToken) {
-        document.getElementById('githubToken').placeholder = 'تم تخزين التوكن (******)';
-    }
-    
-    setupEventListeners();
-    updateUIForLanguage();
-    loadCompanySettings();
-    checkLicenseExpiry();
-    initializeCarSketch();
-    
-    // بدء المزامنة التلقائية
-    startAutoSync();
-}
-
+            // تهيئة بيانات المستخدمين إذا لم تكن موجودة
+            if (!localStorage.getItem('usersData') || JSON.parse(localStorage.getItem('usersData')).length === 0) {
+                localStorage.setItem('usersData', JSON.stringify(sampleUsers));
+            }
+            
+            setupEventListeners();
+            loadCompanySettings();
+            checkLicenseExpiry();
+            initializeCarSketch();
+        }
 
         function setupEventListeners() {
             // تسجيل الدخول والخروج
             document.getElementById('loginBtn').addEventListener('click', login);
             document.getElementById('logoutBtn').addEventListener('click', logout);
             
+            // البحث الديناميكي عن المستخدمين
+            document.getElementById('username').addEventListener('input', function() {
+                searchUsers(this.value);
+            });
+            
             // تبديل الأقسام
             document.querySelectorAll('.nav-tab').forEach(tab => {
                 tab.addEventListener('click', switchTab);
             });
-            
-            // تبديل اللغة
-            document.getElementById('langSwitch').addEventListener('click', toggleLanguage);
             
             // إدارة السيارات
             document.getElementById('importCarsFile').addEventListener('change', function() {
@@ -2275,19 +1651,19 @@ function saveGitHubUrl() {
             
             // أزرار التصدير والطباعة للسيارات
             document.getElementById('printCarsTable').addEventListener('click', () => 
-                printTable('carsTable', currentLanguage === 'ar' ? 'بيانات السيارات' : 'Cars Data'));
+                printTable('carsTable', 'بيانات السيارات'));
             document.getElementById('exportCarsPDF').addEventListener('click', () => 
-                exportTableToPDF('carsTable', currentLanguage === 'ar' ? 'بيانات السيارات' : 'Cars Data'));
+                exportTableToPDF('carsTable', 'بيانات السيارات'));
             document.getElementById('exportCarsExcel').addEventListener('click', () => 
-                exportTableToExcel(carsData, currentLanguage === 'ar' ? 'بيانات السيارات' : 'Cars Data'));
+                exportTableToExcel(carsData, 'بيانات السيارات'));
             
             // أزرار التصدير والطباعة للتسليم
             document.getElementById('printDelivery').addEventListener('click', () => 
-                printTable('deliveryTable', currentLanguage === 'ar' ? 'تسليم السيارات' : 'Car Deliveries'));
+                printTable('deliveryTable', 'تسليم السيارات'));
             document.getElementById('exportDeliveryPDF').addEventListener('click', () => 
-                exportTableToPDF('deliveryTable', currentLanguage === 'ar' ? 'تسليم السيارات' : 'Car Deliveries'));
+                exportTableToPDF('deliveryTable', 'تسليم السيارات'));
             document.getElementById('exportDeliveryExcel').addEventListener('click', () => 
-                exportTableToExcel(deliveriesData, currentLanguage === 'ar' ? 'تسليم السيارات' : 'Car Deliveries'));
+                exportTableToExcel(deliveriesData, 'تسليم السيارات'));
             
             // أزرار التصدير والطباعة للتاريخ
             document.getElementById('printHistory').addEventListener('click', printCarHistory);
@@ -2299,7 +1675,7 @@ function saveGitHubUrl() {
             document.getElementById('yearlyReport').addEventListener('click', () => generateReport('yearly'));
             document.getElementById('expiryReport').addEventListener('click', () => generateReport('expiry'));
             document.getElementById('exportReport').addEventListener('click', () => 
-                exportTableToExcel(generateReportData(), currentLanguage === 'ar' ? 'التقارير والإحصائيات' : 'Reports and Statistics'));
+                exportTableToExcel(generateReportData(), 'التقارير والإحصائيات'));
             
             // أزرار التنبيهات
             document.getElementById('refreshAlerts').addEventListener('click', loadAlertsData);
@@ -2314,17 +1690,6 @@ function saveGitHubUrl() {
             });
             document.getElementById('addRestaurant').addEventListener('click', showRestaurantModal);
             document.getElementById('saveCompanySettings').addEventListener('click', saveCompanySettings);
-            
-            // GitHub
-            document.getElementById('saveGitHubUrl').addEventListener('click', saveGitHubUrl);
-            document.getElementById('exportToGitHub').addEventListener('click', exportDataForGitHub);
-            document.getElementById('syncWithGitHub').addEventListener('click', syncWithGitHub);
-            document.getElementById('loadFromGitHub').addEventListener('click', syncWithGitHub);
-            document.getElementById('syncData').addEventListener('click', syncWithGitHub);
-            
-            // GitHub Token الجديدة
-            document.getElementById('saveGitHubToken').addEventListener('click', saveGitHubToken);
-            document.getElementById('exportToGitHubBtn').addEventListener('click', pushToGitHub);
             
             // إغلاق النماذج
             document.getElementById('closeCarModal').addEventListener('click', () => 
@@ -2382,6 +1747,37 @@ function saveGitHubUrl() {
             }
         }
 
+        // البحث الديناميكي عن المستخدمين
+        function searchUsers(query) {
+            const resultsContainer = document.getElementById('userSearchResults');
+            resultsContainer.innerHTML = '';
+            
+            if (query.length < 1) {
+                resultsContainer.style.display = 'none';
+                return;
+            }
+            
+            const filteredUsers = usersData.filter(user => 
+                user.username.toLowerCase().includes(query.toLowerCase())
+            );
+            
+            if (filteredUsers.length > 0) {
+                filteredUsers.forEach(user => {
+                    const item = document.createElement('div');
+                    item.className = 'search-result-item';
+                    item.textContent = user.username;
+                    item.addEventListener('click', function() {
+                        document.getElementById('username').value = user.username;
+                        resultsContainer.style.display = 'none';
+                    });
+                    resultsContainer.appendChild(item);
+                });
+                resultsContainer.style.display = 'block';
+            } else {
+                resultsContainer.style.display = 'none';
+            }
+        }
+
         function switchTab() {
             document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
             document.querySelectorAll('.content-section').forEach(section => section.classList.remove('active'));
@@ -2393,60 +1789,42 @@ function saveGitHubUrl() {
             if (targetId === 'alerts') loadAlertsData();
         }
 
-           function login() {
-    const username = document.getElementById('username').value.trim();
-    const password = document.getElementById('password').value;
-    
-    console.log('🔐 محاولة تسجيل دخول:', { username, password }); // للت debugging
-    
-    if (!username || !password) {
-        alert(currentLanguage === 'ar' ? 'يرجى إدخال اسم المستخدم وكلمة المرور' : 'Please enter username and password');
-        return;
-    }
-    
-    const normalizedUsername = username.toLowerCase();
-    
-    // البحث عن المستخدم مع طباعة البيانات للت debugging
-    console.log('👥 بيانات المستخدمين المتاحة:', usersData);
-    
-    const user = usersData.find(u => {
-        const userUsername = u.username ? u.username.toLowerCase() : '';
-        const userPassword = u.password || '';
-        const match = userUsername === normalizedUsername && userPassword === password;
-        
-        console.log('🔍 مقارنة مستخدم:', {
-            inputUsername: normalizedUsername,
-            dbUsername: userUsername,
-            inputPassword: password,
-            dbPassword: userPassword,
-            match: match
-        });
-        
-        return match;
-    });
-    
-    if (user) {
-        currentUser = user;
-        document.getElementById('loginScreen').style.display = 'none';
-        document.getElementById('appScreen').style.display = 'block';
-        
-        updateUserInterface();
-        loadAllData();
-        
-        // بدء المزامنة التلقائية بعد تسجيل الدخول بنجاح
-        setTimeout(() => {
-            syncWithGitHub();
-        }, 1000);
-        
-        console.log(currentLanguage === 'ar' ? `تم الدخول بنجاح: ${user.username}` : `Login successful: ${user.username}`);
-        
-        // إظهار رسالة نجاح
-        showSyncNotification(currentLanguage === 'ar' ? `مرحباً ${user.username}!` : `Welcome ${user.username}!`, 'success');
-    } else {
-        console.log('❌ فشل تسجيل الدخول - لا يوجد تطابق');
-        alert(currentLanguage === 'ar' ? 'اسم المستخدم أو كلمة المرور غير صحيحة' : 'Invalid username or password');
-    }
-}
+        function login() {
+            const username = document.getElementById('username').value.trim();
+            const password = document.getElementById('password').value;
+            
+            console.log('🔐 محاولة تسجيل دخول:', { username, password });
+            
+            if (!username || !password) {
+                alert('يرجى إدخال اسم المستخدم وكلمة المرور');
+                return;
+            }
+            
+            const normalizedUsername = username.toLowerCase();
+            
+            const user = usersData.find(u => {
+                const userUsername = u.username ? u.username.toLowerCase() : '';
+                const userPassword = u.password || '';
+                return userUsername === normalizedUsername && userPassword === password;
+            });
+            
+            if (user) {
+                currentUser = user;
+                document.getElementById('loginScreen').style.display = 'none';
+                document.getElementById('appScreen').style.display = 'block';
+                
+                updateUserInterface();
+                loadAllData();
+                
+                console.log(`تم الدخول بنجاح: ${user.username}`);
+                
+                // إظهار رسالة نجاح
+                showSyncNotification(`مرحباً ${user.username}!`, 'success');
+            } else {
+                console.log('❌ فشل تسجيل الدخول - لا يوجد تطابق');
+                alert('اسم المستخدم أو كلمة المرور غير صحيحة');
+            }
+        }
 
         function logout() {
             currentUser = null;
@@ -2457,20 +1835,19 @@ function saveGitHubUrl() {
         }
 
         function updateUserInterface() {
-            document.getElementById('userName').textContent = currentLanguage === 'ar' ? 
-                `مستخدم: ${currentUser.username}` : `User: ${currentUser.username}`;
+            document.getElementById('userName').textContent = `مستخدم: ${currentUser.username}`;
                 
             let roleText = '';
             let roleClass = '';
             
             if (currentUser.role === 'data_entry') {
-                roleText = currentLanguage === 'ar' ? '(مدخل بيانات)' : '(Data Entry)';
+                roleText = '(مدخل بيانات)';
                 roleClass = 'role-data-entry';
             } else if (currentUser.role === 'admin') {
-                roleText = currentLanguage === 'ar' ? '(أدمن)' : '(Admin)';
+                roleText = '(أدمن)';
                 roleClass = 'role-admin';
             } else if (currentUser.role === 'super_admin') {
-                roleText = currentLanguage === 'ar' ? '(سوبر أدمن)' : '(Super Admin)';
+                roleText = '(سوبر أدمن)';
                 roleClass = 'role-super-admin';
             }
             
@@ -2502,7 +1879,7 @@ function saveGitHubUrl() {
             
             if (carsData.length === 0) {
                 const row = document.createElement('tr');
-                row.innerHTML = `<td colspan="8" style="text-align: center;">${currentLanguage === 'ar' ? 'لا توجد سيارات مسجلة' : 'No cars registered'}</td>`;
+                row.innerHTML = `<td colspan="9" style="text-align: center;">لا توجد سيارات مسجلة</td>`;
                 tbody.appendChild(row);
                 return;
             }
@@ -2516,11 +1893,12 @@ function saveGitHubUrl() {
                     <td>${car.year}</td>
                     <td>${car.licenseExpiry}</td>
                     <td>${car.adLicenseExpiry || '-'}</td>
+                    <td>${car.municipalityLicenseExpiry || '-'}</td>
                     <td>${car.status}</td>
                     <td class="no-export">
-                        <button class="btn btn-warning edit-car" data-id="${car.id}">${currentLanguage === 'ar' ? 'تعديل' : 'Edit'}</button>
+                        <button class="btn btn-warning edit-car" data-id="${car.id}">تعديل</button>
                         ${(currentUser.role === 'admin' || currentUser.role === 'super_admin') ? 
-                          `<button class="btn btn-danger delete-car" data-id="${car.id}">${currentLanguage === 'ar' ? 'حذف' : 'Delete'}</button>` : ''}
+                          `<button class="btn btn-danger delete-car" data-id="${car.id}">حذف</button>` : ''}
                     </td>
                 `;
                 tbody.appendChild(row);
@@ -2545,7 +1923,7 @@ function saveGitHubUrl() {
             
             if (deliveriesData.length === 0) {
                 const row = document.createElement('tr');
-                row.innerHTML = `<td colspan="8" style="text-align: center;">${currentLanguage === 'ar' ? 'لا توجد عمليات تسليم مسجلة' : 'No deliveries registered'}</td>`;
+                row.innerHTML = `<td colspan="8" style="text-align: center;">لا توجد عمليات تسليم مسجلة</td>`;
                 tbody.appendChild(row);
                 return;
             }
@@ -2561,11 +1939,11 @@ function saveGitHubUrl() {
                     <td>${delivery.deliveryDate || '-'}</td>
                     <td>${delivery.notes}</td>
                     <td class="no-export">
-                        <button class="btn btn-warning edit-delivery" data-id="${delivery.id}">${currentLanguage === 'ar' ? 'تعديل' : 'Edit'}</button>
-                        <button class="btn btn-info print-receipt" data-id="${delivery.id}">${currentLanguage === 'ar' ? 'طباعة النموذج' : 'Print Receipt'}</button>
-                        ${!delivery.deliveryDate ? `<button class="btn btn-primary complete-delivery" data-id="${delivery.id}">${currentLanguage === 'ar' ? 'إتمام التسليم' : 'Complete Delivery'}</button>` : ''}
+                        <button class="btn btn-warning edit-delivery" data-id="${delivery.id}">تعديل</button>
+                        <button class="btn btn-info print-receipt" data-id="${delivery.id}">طباعة النموذج</button>
+                        ${!delivery.deliveryDate ? `<button class="btn btn-primary complete-delivery" data-id="${delivery.id}">إتمام التسليم</button>` : ''}
                         ${(currentUser.role === 'admin' || currentUser.role === 'super_admin') ? 
-                          `<button class="btn btn-danger delete-delivery" data-id="${delivery.id}">${currentLanguage === 'ar' ? 'حذف' : 'Delete'}</button>` : ''}
+                          `<button class="btn btn-danger delete-delivery" data-id="${delivery.id}">حذف</button>` : ''}
                     </td>
                 `;
                 tbody.appendChild(row);
@@ -2603,11 +1981,11 @@ function saveGitHubUrl() {
             usersData.forEach(user => {
                 let roleText = '';
                 if (user.role === 'data_entry') {
-                    roleText = currentLanguage === 'ar' ? 'مدخل بيانات' : 'Data Entry';
+                    roleText = 'مدخل بيانات';
                 } else if (user.role === 'admin') {
-                    roleText = currentLanguage === 'ar' ? 'أدمن' : 'Admin';
+                    roleText = 'أدمن';
                 } else if (user.role === 'super_admin') {
-                    roleText = currentLanguage === 'ar' ? 'سوبر أدمن' : 'Super Admin';
+                    roleText = 'سوبر أدمن';
                 }
                 
                 const row = document.createElement('tr');
@@ -2618,9 +1996,9 @@ function saveGitHubUrl() {
                     <td>${user.created}</td>
                     <td>${user.status}</td>
                     <td class="no-export">
-                        <button class="btn btn-warning edit-user" data-id="${user.id}">${currentLanguage === 'ar' ? 'تعديل' : 'Edit'}</button>
+                        <button class="btn btn-warning edit-user" data-id="${user.id}">تعديل</button>
                         ${currentUser.role === 'super_admin' ? 
-                          `<button class="btn btn-danger delete-user" data-id="${user.id}">${currentLanguage === 'ar' ? 'حذف' : 'Delete'}</button>` : ''}
+                          `<button class="btn btn-danger delete-user" data-id="${user.id}">حذف</button>` : ''}
                     </td>
                 `;
                 tbody.appendChild(row);
@@ -2645,7 +2023,7 @@ function saveGitHubUrl() {
             
             if (restaurantsData.length === 0) {
                 const row = document.createElement('tr');
-                row.innerHTML = `<td colspan="4" style="text-align: center;">${currentLanguage === 'ar' ? 'لا توجد مواقع مسجلة' : 'No locations registered'}</td>`;
+                row.innerHTML = `<td colspan="4" style="text-align: center;">لا توجد مواقع مسجلة</td>`;
                 tbody.appendChild(row);
                 return;
             }
@@ -2657,8 +2035,8 @@ function saveGitHubUrl() {
                     <td>${restaurant.type}</td>
                     <td>${restaurant.address}</td>
                     <td class="no-export">
-                        <button class="btn btn-warning edit-restaurant" data-id="${restaurant.id}">${currentLanguage === 'ar' ? 'تعديل' : 'Edit'}</button>
-                        <button class="btn btn-danger delete-restaurant" data-id="${restaurant.id}">${currentLanguage === 'ar' ? 'حذف' : 'Delete'}</button>
+                        <button class="btn btn-warning edit-restaurant" data-id="${restaurant.id}">تعديل</button>
+                        <button class="btn btn-danger delete-restaurant" data-id="${restaurant.id}">حذف</button>
                     </td>
                 `;
                 tbody.appendChild(row);
@@ -2768,99 +2146,32 @@ function saveGitHubUrl() {
             
             if (expiringCars.length > 0) {
                 const carNumbers = expiringCars.map(car => car.number).join(', ');
-                alertMessage.textContent = currentLanguage === 'ar' 
-                    ? `هناك ${expiringCars.length} سيارات على وشك انتهاء الترخيص خلال الشهر القادم: ${carNumbers}`
-                    : `There are ${expiringCars.length} cars with licenses expiring next month: ${carNumbers}`;
+                alertMessage.textContent = `هناك ${expiringCars.length} سيارات على وشك انتهاء الترخيص خلال الشهر القادم: ${carNumbers}`;
                 alertElement.style.display = 'block';
             } else {
                 alertElement.style.display = 'none';
             }
         }
 
-        function toggleLanguage() {
-            currentLanguage = currentLanguage === 'ar' ? 'en' : 'ar';
-            const isRTL = currentLanguage === 'ar';
+        function showDeliveryForm() {
+            console.log('📝 فتح نموذج تسليم جديد');
             
-            document.querySelector('html').setAttribute('dir', isRTL ? 'rtl' : 'ltr');
-            document.querySelector('html').setAttribute('lang', currentLanguage);
-            document.getElementById('langSwitch').textContent = isRTL ? 'English' : 'العربية';
+            // إعادة تعيين النموذج
+            resetDeliveryForm();
             
-            updateUIForLanguage();
+            // إظهار النموذج
+            document.getElementById('deliveryForm').style.display = 'block';
+            document.getElementById('receiptForm').style.display = 'none';
+            
+            // تعيين تاريخ اليوم تلقائياً
+            const today = new Date().toISOString().split('T')[0];
+            document.getElementById('receiveDate').value = today;
+            
+            // إخفاء النموذج الآخر
+            editingDeliveryId = null;
+            
+            console.log('✅ نموذج التسليم جاهز للاستخدام');
         }
-
-        function updateUIForLanguage() {
-            Object.keys(translations[currentLanguage]).forEach(key => {
-                const elements = document.querySelectorAll(`[id="${key}"]`);
-                elements.forEach(element => {
-                    if (element.tagName === 'INPUT' && element.type !== 'button' && element.type !== 'submit') {
-                        element.placeholder = translations[currentLanguage][key];
-                    } else {
-                        element.textContent = translations[currentLanguage][key];
-                    }
-                });
-            });
-            
-            updateTableHeaders();
-            
-            if (currentUser) {
-                updateUserInterface();
-                loadAllData();
-            }
-        }
-
-        function updateTableHeaders() {
-            const carsTableHeaders = document.querySelectorAll('#carsTable th');
-            if (carsTableHeaders.length >= 8) {
-                carsTableHeaders[0].textContent = currentLanguage === 'ar' ? 'رقم السيارة' : 'Car Number';
-                carsTableHeaders[1].textContent = currentLanguage === 'ar' ? 'نوع السيارة' : 'Car Type';
-                carsTableHeaders[2].textContent = currentLanguage === 'ar' ? 'موديل السيارة' : 'Car Model';
-                carsTableHeaders[3].textContent = currentLanguage === 'ar' ? 'سنة الصنع' : 'Manufacturing Year';
-                carsTableHeaders[4].textContent = currentLanguage === 'ar' ? 'تاريخ انتهاء الترخيص' : 'License Expiry';
-                carsTableHeaders[5].textContent = currentLanguage === 'ar' ? 'تاريخ انتهاء ترخيص الإعلان' : 'Ad License Expiry';
-                carsTableHeaders[6].textContent = currentLanguage === 'ar' ? 'الحالة' : 'Status';
-                carsTableHeaders[7].textContent = currentLanguage === 'ar' ? 'الإجراءات' : 'Actions';
-            }
-            
-            const deliveryTableHeaders = document.querySelectorAll('#deliveryTable th');
-            if (deliveryTableHeaders.length >= 8) {
-                deliveryTableHeaders[0].textContent = currentLanguage === 'ar' ? 'رقم السيارة' : 'Car Number';
-                deliveryTableHeaders[1].textContent = currentLanguage === 'ar' ? 'اسم السائق' : 'Driver Name';
-                deliveryTableHeaders[2].textContent = currentLanguage === 'ar' ? 'رقم الموبايل' : 'Phone Number';
-                deliveryTableHeaders[3].textContent = currentLanguage === 'ar' ? 'اسم المطعم' : 'Restaurant Name';
-                deliveryTableHeaders[4].textContent = currentLanguage === 'ar' ? 'تاريخ الاستلام' : 'Receive Date';
-                deliveryTableHeaders[5].textContent = currentLanguage === 'ar' ? 'تاريخ التسليم' : 'Delivery Date';
-                deliveryTableHeaders[6].textContent = currentLanguage === 'ar' ? 'ملاحظات' : 'Notes';
-                deliveryTableHeaders[7].textContent = currentLanguage === 'ar' ? 'الإجراءات' : 'Actions';
-            }
-            
-            const alertsTableHeaders = document.querySelectorAll('#expiringLicensesTable th');
-            if (alertsTableHeaders.length >= 4) {
-                alertsTableHeaders[0].textContent = currentLanguage === 'ar' ? 'رقم السيارة' : 'Car Number';
-                alertsTableHeaders[1].textContent = currentLanguage === 'ar' ? 'نوع الترخيص' : 'License Type';
-                alertsTableHeaders[2].textContent = currentLanguage === 'ar' ? 'تاريخ الانتهاء' : 'Expiry Date';
-                alertsTableHeaders[3].textContent = currentLanguage === 'ar' ? 'الأيام المتبقية' : 'Days Remaining';
-            }
-        }
-
-              function showDeliveryForm() {
-    console.log('📝 فتح نموذج تسليم جديد');
-    
-    // إعادة تعيين النموذج
-    resetDeliveryForm();
-    
-    // إظهار النموذج
-    document.getElementById('deliveryForm').style.display = 'block';
-    document.getElementById('receiptForm').style.display = 'none';
-    
-    // تعيين تاريخ اليوم تلقائياً
-    const today = new Date().toISOString().split('T')[0];
-    document.getElementById('receiveDate').value = today;
-    
-    // إخفاء النموذج الآخر
-    editingDeliveryId = null;
-    
-    console.log('✅ نموذج التسليم جاهز للاستخدام');
-}
 
         function showReceiptForm() {
             document.getElementById('receiptForm').style.display = 'block';
@@ -2868,7 +2179,7 @@ function saveGitHubUrl() {
             
             const companyName = localStorage.getItem('companyName') || "شركة نايف للأغذية";
             const companyLogo = localStorage.getItem('companyLogo') || "https://i.postimg.cc/NM2zJWZD/NAIF-LOGO.jpg";
-            const companyAddress = localStorage.getItem('companyAddress') || "الكويت - الفروانية";
+            const companyAddress = localStorage.getItem('companyAddress') || "الكويت - الشويخ الصناعية";
             
             document.getElementById('receiptCompanyName').textContent = companyName;
             document.getElementById('receiptCompanyAddress').textContent = companyAddress;
@@ -2887,66 +2198,68 @@ function saveGitHubUrl() {
         }
 
         function hideDeliveryForm() {
-    document.getElementById('deliveryForm').style.display = 'none';
-    document.getElementById('receiptForm').style.display = 'none';
-    
-    // إخفاء نتائج البحث
-    const carSearchResults = document.getElementById('carSearchResults');
-    const restaurantSearchResults = document.getElementById('restaurantSearchResults');
-    if (carSearchResults) carSearchResults.style.display = 'none';
-    if (restaurantSearchResults) restaurantSearchResults.style.display = 'none';
-    
-    // إخفاء رسائل الخطأ
-    const carNumberError = document.getElementById('carNumberError');
-    const restaurantNameError = document.getElementById('restaurantNameError');
-    if (carNumberError) carNumberError.style.display = 'none';
-    if (restaurantNameError) restaurantNameError.style.display = 'none';
-    
-    // إعادة تعيين المتغيرات
-    editingDeliveryId = null;
-    scratches = [];
-    
-    // تحديث قائمة الخدوش
-    updateScratchesList();
-    
-    console.log('✅ تم إخفاء نموذج التسليم');
-}
-        function resetDeliveryForm() {
-    // إعادة تعيين جميع حقول النموذج
-    const fields = [
-        'carNumber', 'restaurantName', 'driverName', 'phoneNumber',
-        'receiveDate', 'deliveryDate', 'notes'
-    ];
-    
-    fields.forEach(fieldId => {
-        const element = document.getElementById(fieldId);
-        if (element) {
-            if (element.type === 'date') {
-                if (fieldId === 'receiveDate') {
-                    element.valueAsDate = new Date(); // تاريخ اليوم
-                } else {
-                    element.value = '';
-                }
-            } else {
-                element.value = '';
-            }
+            document.getElementById('deliveryForm').style.display = 'none';
+            document.getElementById('receiptForm').style.display = 'none';
+            
+            // إخفاء نتائج البحث
+            const carSearchResults = document.getElementById('carSearchResults');
+            const restaurantSearchResults = document.getElementById('restaurantSearchResults');
+            if (carSearchResults) carSearchResults.style.display = 'none';
+            if (restaurantSearchResults) restaurantSearchResults.style.display = 'none';
+            
+            // إخفاء رسائل الخطأ
+            const carNumberError = document.getElementById('carNumberError');
+            const restaurantNameError = document.getElementById('restaurantNameError');
+            if (carNumberError) carNumberError.style.display = 'none';
+            if (restaurantNameError) restaurantNameError.style.display = 'none';
+            
+            // إعادة تعيين المتغيرات
+            editingDeliveryId = null;
+            scratches = [];
+            
+            // تحديث قائمة الخدوش
+            updateScratchesList();
+            
+            console.log('✅ تم إخفاء نموذج التسليم');
         }
-    });
-    
-    // إعادة تعيين الخدوش
-    scratches = [];
-    updateScratchesList();
-    
-    // إخفاء رسائل الخطأ
-    document.getElementById('carNumberError').style.display = 'none';
-    document.getElementById('restaurantNameError').style.display = 'none';
-    
-    // إخفاء نتائج البحث
-    document.getElementById('carSearchResults').style.display = 'none';
-    document.getElementById('restaurantSearchResults').style.display = 'none';
-    
-    console.log('✅ تم إعادة تعيين نموذج التسليم');
-}
+
+        function resetDeliveryForm() {
+            // إعادة تعيين جميع حقول النموذج
+            const fields = [
+                'carNumber', 'restaurantName', 'driverName', 'phoneNumber',
+                'receiveDate', 'deliveryDate', 'notes'
+            ];
+            
+            fields.forEach(fieldId => {
+                const element = document.getElementById(fieldId);
+                if (element) {
+                    if (element.type === 'date') {
+                        if (fieldId === 'receiveDate') {
+                            element.valueAsDate = new Date(); // تاريخ اليوم
+                        } else {
+                            element.value = '';
+                        }
+                    } else {
+                        element.value = '';
+                    }
+                }
+            });
+            
+            // إعادة تعيين الخدوش
+            scratches = [];
+            updateScratchesList();
+            
+            // إخفاء رسائل الخطأ
+            document.getElementById('carNumberError').style.display = 'none';
+            document.getElementById('restaurantNameError').style.display = 'none';
+            
+            // إخفاء نتائج البحث
+            document.getElementById('carSearchResults').style.display = 'none';
+            document.getElementById('restaurantSearchResults').style.display = 'none';
+            
+            console.log('✅ تم إعادة تعيين نموذج التسليم');
+        }
+
         function saveDelivery() {
             const carNumber = document.getElementById('carNumber').value.trim();
             const restaurantName = document.getElementById('restaurantName').value.trim();
@@ -2957,36 +2270,30 @@ function saveGitHubUrl() {
             const notes = document.getElementById('notes').value;
             
             if (!carNumber || !restaurantName || !driverName) {
-                alert(currentLanguage === 'ar' ? 'يرجى ملء الحقول الإجبارية (رقم السيارة، اسم المطعم، اسم السائق)' : 'Please fill required fields (Car Number, Restaurant Name, Driver Name)');
+                alert('يرجى ملء الحقول الإجبارية (رقم السيارة، اسم المطعم، اسم السائق)');
                 return;
             }
             
             const car = carsData.find(c => c.number === carNumber);
             if (!car) {
                 document.getElementById('carNumberError').style.display = 'block';
-                alert(currentLanguage === 'ar' ? 'السيارة غير مسجلة في النظام' : 'Car not registered in system');
+                alert('السيارة غير مسجلة في النظام');
                 return;
             }
             document.getElementById('carNumberError').style.display = 'none';
             
             if (car.status !== 'نشطة') {
                 let statusMessage = '';
-                if (currentLanguage === 'ar') {
-                    statusMessage = car.status === 'تحت الصيانة' ? 'تحت الصيانة' : 'غير نشطة';
-                } else {
-                    statusMessage = car.status === 'تحت الصيانة' ? 'Under Maintenance' : 'Inactive';
-                }
+                statusMessage = car.status === 'تحت الصيانة' ? 'تحت الصيانة' : 'غير نشطة';
                 
-                alert(currentLanguage === 'ar' 
-                    ? `لا يمكن تسليم السيارة ${carNumber} لأنها ${statusMessage}`
-                    : `Car ${carNumber} cannot be delivered because it's ${statusMessage}`);
+                alert(`لا يمكن تسليم السيارة ${carNumber} لأنها ${statusMessage}`);
                 return;
             }
             
             const restaurantExists = restaurantsData.some(restaurant => restaurant.name === restaurantName);
             if (!restaurantExists) {
                 document.getElementById('restaurantNameError').style.display = 'block';
-                alert(currentLanguage === 'ar' ? 'المطعم غير مسجل في النظام' : 'Restaurant not registered in system');
+                alert('المطعم غير مسجل في النظام');
                 return;
             }
             document.getElementById('restaurantNameError').style.display = 'none';
@@ -2994,9 +2301,7 @@ function saveGitHubUrl() {
             if (!editingDeliveryId) {
                 const activeDelivery = deliveriesData.find(d => d.carNumber === carNumber && !d.deliveryDate);
                 if (activeDelivery) {
-                    alert(currentLanguage === 'ar' 
-                        ? `لا يمكن تسليم السيارة ${carNumber} لأنها مسلمة حالياً للسائق ${activeDelivery.driverName}`
-                        : `Car ${carNumber} cannot be delivered as it's currently with driver ${activeDelivery.driverName}`);
+                    alert(`لا يمكن تسليم السيارة ${carNumber} لأنها مسلمة حالياً للسائق ${activeDelivery.driverName}`);
                     return;
                 }
             }
@@ -3020,7 +2325,7 @@ function saveGitHubUrl() {
                         ...deliveryData
                     };
                 } else {
-                    alert(currentLanguage === 'ar' ? 'لم يتم العثور على التسليم للتعديل' : 'Delivery not found for editing');
+                    alert('لم يتم العثور على التسليم للتعديل');
                     return;
                 }
             } else {
@@ -3037,13 +2342,13 @@ function saveGitHubUrl() {
             updateStats();
             hideDeliveryForm();
             
-            alert(currentLanguage === 'ar' ? 'تم حفظ بيانات التسليم بنجاح' : 'Delivery data saved successfully');
+            alert('تم حفظ بيانات التسليم بنجاح');
         }
 
         function printDeliveryReceipt(deliveryId) {
             const delivery = deliveriesData.find(d => d.id === deliveryId);
             if (!delivery) {
-                alert(currentLanguage === 'ar' ? 'لم يتم العثور على بيانات التسليم' : 'Delivery data not found');
+                alert('لم يتم العثور على بيانات التسليم');
                 return;
             }
             
@@ -3053,7 +2358,7 @@ function saveGitHubUrl() {
                         <img id="receiptLogo" src="${localStorage.getItem('companyLogo') || 'https://i.postimg.cc/NM2zJWZD/NAIF-LOGO.jpg'}" alt="شعار الشركة" class="receipt-logo">
                         <h1 class="receipt-title">نموذج استلام سيارة</h1>
                         <div class="receipt-company">${localStorage.getItem('companyName') || 'شركة نايف للأغذية'}</div>
-                        <div>${localStorage.getItem('companyAddress') || 'الكويت - الفروانية'}</div>
+                        <div>${localStorage.getItem('companyAddress') || 'الكويت - الشويخ الصناعية'}</div>
                     </div>
                     
                     <div class="receipt-details">
@@ -3163,27 +2468,28 @@ function saveGitHubUrl() {
                 saveAllData();
                 loadDeliveriesData();
                 updateStats();
-                alert(currentLanguage === 'ar' ? 'تم إتمام التسليم بنجاح' : 'Delivery completed successfully');
+                alert('تم إتمام التسليم بنجاح');
             }
         }
 
         function deleteDelivery(id) {
-            if (confirm(currentLanguage === 'ar' ? 'هل أنت متأكد من حذف هذا التسليم؟' : 'Are you sure you want to delete this delivery?')) {
+            if (confirm('هل أنت متأكد من حذف هذا التسليم؟')) {
                 deliveriesData = deliveriesData.filter(d => d.id !== id);
                 saveAllData();
                 loadDeliveriesData();
                 updateStats();
-                alert(currentLanguage === 'ar' ? 'تم حذف التسليم بنجاح' : 'Delivery deleted successfully');
+                alert('تم حذف التسليم بنجاح');
             }
         }
 
         function showCarModal() {
             editingCarId = null;
             document.getElementById('carModal').style.display = 'block';
-            document.getElementById('carModalTitle').textContent = currentLanguage === 'ar' ? 'إضافة سيارة جديدة' : 'Add New Car';
+            document.getElementById('carModalTitle').textContent = 'إضافة سيارة جديدة';
             document.getElementById('carModal').querySelector('form').reset();
             document.getElementById('newLicenseExpiry').valueAsDate = new Date();
             document.getElementById('newAdLicenseExpiry').valueAsDate = new Date();
+            document.getElementById('newMunicipalityLicenseExpiry').valueAsDate = new Date();
         }
 
         function saveCar() {
@@ -3193,43 +2499,45 @@ function saveGitHubUrl() {
             const year = document.getElementById('newCarYear').value;
             const licenseExpiry = document.getElementById('newLicenseExpiry').value;
             const adLicenseExpiry = document.getElementById('newAdLicenseExpiry').value;
+            const municipalityLicenseExpiry = document.getElementById('newMunicipalityLicenseExpiry').value;
             const status = document.getElementById('newCarStatus').value;
             
             if (!number || !type || !model || !year || !licenseExpiry) {
-                alert(currentLanguage === 'ar' ? 'يرجى ملء جميع الحقول الإجبارية' : 'Please fill all required fields');
+                alert('يرجى ملء جميع الحقول الإجبارية');
                 return;
             }
             
             const currentYear = new Date().getFullYear();
             if (year < 1900 || year > currentYear + 1) {
-                alert(currentLanguage === 'ar' ? 'سنة الصنع غير صحيحة' : 'Invalid manufacturing year');
+                alert('سنة الصنع غير صحيحة');
                 return;
             }
             
             if (!isValidDate(licenseExpiry)) {
-                alert(currentLanguage === 'ar' ? 'تاريخ انتهاء الترخيص غير صحيح' : 'Invalid license expiry date');
+                alert('تاريخ انتهاء دفتر السيارة غير صحيح');
                 return;
             }
             
             if (adLicenseExpiry && !isValidDate(adLicenseExpiry)) {
-                alert(currentLanguage === 'ar' ? 'تاريخ انتهاء ترخيص الإعلان غير صحيح' : 'Invalid ad license expiry date');
+                alert('تاريخ انتهاء ترخيص الإعلان غير صحيح');
+                return;
+            }
+            
+            if (municipalityLicenseExpiry && !isValidDate(municipalityLicenseExpiry)) {
+                alert('تاريخ انتهاء ترخيص البلدية غير صحيح');
                 return;
             }
             
             if (editingCarId) {
                 const existingCar = carsData.find(c => c.number === number && c.id !== editingCarId);
                 if (existingCar) {
-                    alert(currentLanguage === 'ar' 
-                        ? `رقم السيارة ${number} مستخدم من قبل سيارة أخرى`
-                        : `Car number ${number} is already used by another car`);
+                    alert(`رقم السيارة ${number} مستخدم من قبل سيارة أخرى`);
                     return;
                 }
             } else {
                 const existingCar = carsData.find(c => c.number === number);
                 if (existingCar) {
-                    alert(currentLanguage === 'ar' 
-                        ? `رقم السيارة ${number} موجود مسبقاً في النظام`
-                        : `Car number ${number} already exists in the system`);
+                    alert(`رقم السيارة ${number} موجود مسبقاً في النظام`);
                     return;
                 }
             }
@@ -3245,10 +2553,11 @@ function saveGitHubUrl() {
                         year: parseInt(year),
                         licenseExpiry: licenseExpiry,
                         adLicenseExpiry: adLicenseExpiry || null,
+                        municipalityLicenseExpiry: municipalityLicenseExpiry || null,
                         status: status
                     };
                 } else {
-                    alert(currentLanguage === 'ar' ? 'لم يتم العثور على السيارة للتعديل' : 'Car not found for editing');
+                    alert('لم يتم العثور على السيارة للتعديل');
                     return;
                 }
             } else {
@@ -3260,6 +2569,7 @@ function saveGitHubUrl() {
                     year: parseInt(year),
                     licenseExpiry: licenseExpiry,
                     adLicenseExpiry: adLicenseExpiry || null,
+                    municipalityLicenseExpiry: municipalityLicenseExpiry || null,
                     status: status
                 };
                 
@@ -3273,7 +2583,7 @@ function saveGitHubUrl() {
             checkLicenseExpiry();
             document.getElementById('carModal').style.display = 'none';
             
-            alert(currentLanguage === 'ar' ? 'تم حفظ بيانات السيارة بنجاح' : 'Car data saved successfully');
+            alert('تم حفظ بيانات السيارة بنجاح');
         }
 
         function isValidDate(dateString) {
@@ -3295,33 +2605,34 @@ function saveGitHubUrl() {
             if (car) {
                 editingCarId = id;
                 document.getElementById('carModal').style.display = 'block';
-                document.getElementById('carModalTitle').textContent = currentLanguage === 'ar' ? 'تعديل بيانات السيارة' : 'Edit Car Data';
+                document.getElementById('carModalTitle').textContent = 'تعديل بيانات السيارة';
                 document.getElementById('newCarNumber').value = car.number;
                 document.getElementById('newCarType').value = car.type;
                 document.getElementById('newCarModel').value = car.model;
                 document.getElementById('newCarYear').value = car.year;
                 document.getElementById('newLicenseExpiry').value = car.licenseExpiry;
                 document.getElementById('newAdLicenseExpiry').value = car.adLicenseExpiry || '';
+                document.getElementById('newMunicipalityLicenseExpiry').value = car.municipalityLicenseExpiry || '';
                 document.getElementById('newCarStatus').value = car.status;
             }
         }
 
         function deleteCar(id) {
-            if (confirm(currentLanguage === 'ar' ? 'هل أنت متأكد من حذف هذه السيارة؟' : 'Are you sure you want to delete this car?')) {
+            if (confirm('هل أنت متأكد من حذف هذه السيارة؟')) {
                 carsData = carsData.filter(c => c.id !== id);
                 saveAllData();
                 loadCarsData();
                 updateStats();
                 updateAlertsBar();
                 checkLicenseExpiry();
-                alert(currentLanguage === 'ar' ? 'تم حذف السيارة بنجاح' : 'Car deleted successfully');
+                alert('تم حذف السيارة بنجاح');
             }
         }
 
         function showUserModal() {
             editingUserId = null;
             document.getElementById('userModal').style.display = 'block';
-            document.getElementById('userModalTitle').textContent = currentLanguage === 'ar' ? 'إضافة مستخدم جديد' : 'Add New User';
+            document.getElementById('userModalTitle').textContent = 'إضافة مستخدم جديد';
             document.getElementById('userModal').querySelector('form').reset();
         }
 
@@ -3332,7 +2643,7 @@ function saveGitHubUrl() {
             const role = document.getElementById('newUserRole').value;
             
             if (!username || !email || !password || !role) {
-                alert(currentLanguage === 'ar' ? 'يرجى ملء جميع الحقول الإجبارية' : 'Please fill all required fields');
+                alert('يرجى ملء جميع الحقول الإجبارية');
                 return;
             }
             
@@ -3366,7 +2677,7 @@ function saveGitHubUrl() {
             saveAllData();
             loadUsersData();
             document.getElementById('userModal').style.display = 'none';
-            alert(currentLanguage === 'ar' ? 'تم حفظ بيانات المستخدم بنجاح' : 'User data saved successfully');
+            alert('تم حفظ بيانات المستخدم بنجاح');
         }
 
         function editUser(id) {
@@ -3374,7 +2685,7 @@ function saveGitHubUrl() {
             if (user) {
                 editingUserId = id;
                 document.getElementById('userModal').style.display = 'block';
-                document.getElementById('userModalTitle').textContent = currentLanguage === 'ar' ? 'تعديل بيانات المستخدم' : 'Edit User Data';
+                document.getElementById('userModalTitle').textContent = 'تعديل بيانات المستخدم';
                 document.getElementById('newUserName').value = user.username;
                 document.getElementById('newUserEmail').value = user.email;
                 document.getElementById('newUserPassword').value = '********';
@@ -3383,18 +2694,18 @@ function saveGitHubUrl() {
         }
 
         function deleteUser(id) {
-            if (confirm(currentLanguage === 'ar' ? 'هل أنت متأكد من حذف هذا المستخدم؟' : 'Are you sure you want to delete this user?')) {
+            if (confirm('هل أنت متأكد من حذف هذا المستخدم؟')) {
                 usersData = usersData.filter(u => u.id !== id);
                 saveAllData();
                 loadUsersData();
-                alert(currentLanguage === 'ar' ? 'تم حذف المستخدم بنجاح' : 'User deleted successfully');
+                alert('تم حذف المستخدم بنجاح');
             }
         }
 
         function showRestaurantModal() {
             editingRestaurantId = null;
             document.getElementById('restaurantModal').style.display = 'block';
-            document.getElementById('restaurantModalTitle').textContent = currentLanguage === 'ar' ? 'إضافة موقع جديد' : 'Add New Location';
+            document.getElementById('restaurantModalTitle').textContent = 'إضافة موقع جديد';
             document.getElementById('restaurantModal').querySelector('form').reset();
         }
 
@@ -3404,7 +2715,7 @@ function saveGitHubUrl() {
             const address = document.getElementById('newRestaurantAddress').value;
 
             if (!name || !type || !address) {
-                alert(currentLanguage === 'ar' ? 'يرجى ملء جميع الحقول الإجبارية' : 'Please fill all required fields');
+                alert('يرجى ملء جميع الحقول الإجبارية');
                 return;
             }
             
@@ -3433,7 +2744,7 @@ function saveGitHubUrl() {
             loadRestaurantsData();
             updateStats();
             document.getElementById('restaurantModal').style.display = 'none';
-            alert(currentLanguage === 'ar' ? 'تم حفظ بيانات الموقع بنجاح' : 'Location data saved successfully');
+            alert('تم حفظ بيانات الموقع بنجاح');
         }
 
         function editRestaurant(id) {
@@ -3441,7 +2752,7 @@ function saveGitHubUrl() {
             if (restaurant) {
                 editingRestaurantId = id;
                 document.getElementById('restaurantModal').style.display = 'block';
-                document.getElementById('restaurantModalTitle').textContent = currentLanguage === 'ar' ? 'تعديل بيانات الموقع' : 'Edit Location Data';
+                document.getElementById('restaurantModalTitle').textContent = 'تعديل بيانات الموقع';
                 document.getElementById('newRestaurantName').value = restaurant.name;
                 document.getElementById('newRestaurantType').value = restaurant.type;
                 document.getElementById('newRestaurantAddress').value = restaurant.address;
@@ -3449,12 +2760,12 @@ function saveGitHubUrl() {
         }
 
         function deleteRestaurant(id) {
-            if (confirm(currentLanguage === 'ar' ? 'هل أنت متأكد من حذف هذا الموقع؟' : 'Are you sure you want to delete this location?')) {
+            if (confirm('هل أنت متأكد من حذف هذا الموقع؟')) {
                 restaurantsData = restaurantsData.filter(r => r.id !== id);
                 saveAllData();
                 loadRestaurantsData();
                 updateStats();
-                alert(currentLanguage === 'ar' ? 'تم حذف الموقع بنجاح' : 'Location deleted successfully');
+                alert('تم حذف الموقع بنجاح');
             }
         }
 
@@ -3471,13 +2782,13 @@ function saveGitHubUrl() {
             
             updateCompanyDisplay();
             
-            alert(currentLanguage === 'ar' ? 'تم حفظ إعدادات الشركة بنجاح' : 'Company settings saved successfully');
+            alert('تم حفظ إعدادات الشركة بنجاح');
         }
 
         function loadCompanySettings() {
             const companyName = localStorage.getItem('companyName') || "شركة نايف للأغذية";
             const companyLogo = localStorage.getItem('companyLogo') || "https://i.postimg.cc/NM2zJWZD/NAIF-LOGO.jpg";
-            const companyAddress = localStorage.getItem('companyAddress') || "الكويت - الفروانية";
+            const companyAddress = localStorage.getItem('companyAddress') || "الكويت - الشويخ الصناعية";
             const companyInfo = localStorage.getItem('companyInfo') || "شركة رائدة في مجال الأغذية والمشروبات";
             
             document.getElementById('companyName').value = companyName;
@@ -3517,15 +2828,15 @@ function saveGitHubUrl() {
                     
                     let location = '';
                     if (x < rect.width * 0.2) {
-                        location = currentLanguage === 'ar' ? 'المقدمة اليسرى' : 'Front Left';
+                        location = 'المقدمة اليسرى';
                     } else if (x < rect.width * 0.4) {
-                        location = currentLanguage === 'ar' ? 'المقدمة' : 'Front';
+                        location = 'المقدمة';
                     } else if (x < rect.width * 0.6) {
-                        location = currentLanguage === 'ar' ? 'الوسط' : 'Middle';
+                        location = 'الوسط';
                     } else if (x < rect.width * 0.8) {
-                        location = currentLanguage === 'ar' ? 'الخلف' : 'Rear';
+                        location = 'الخلف';
                     } else {
-                        location = currentLanguage === 'ar' ? 'المقدمة اليمنى' : 'Front Right';
+                        location = 'المقدمة اليمنى';
                     }
                     
                     addScratch(x, y, location);
@@ -3551,7 +2862,7 @@ function saveGitHubUrl() {
             scratchList.innerHTML = '';
             
             if (scratches.length === 0) {
-                scratchList.innerHTML = `<p>${currentLanguage === 'ar' ? 'لا توجد خدوش مسجلة' : 'No scratches recorded'}</p>`;
+                scratchList.innerHTML = `<p>لا توجد خدوش مسجلة</p>`;
                 return;
             }
             
@@ -3560,7 +2871,7 @@ function saveGitHubUrl() {
                 scratchItem.className = 'scratch-item';
                 scratchItem.innerHTML = `
                     <span class="scratch-location">${scratch.location}</span>
-                    <button class="remove-scratch" data-id="${scratch.id}">${currentLanguage === 'ar' ? 'حذف' : 'Remove'}</button>
+                    <button class="remove-scratch" data-id="${scratch.id}">حذف</button>
                 `;
                 scratchList.appendChild(scratchItem);
             });
@@ -3600,7 +2911,7 @@ function saveGitHubUrl() {
             renderScratches();
         }
 
-             function searchCars(query) {
+        function searchCars(query) {
             const resultsContainer = document.getElementById('carSearchResults');
             resultsContainer.innerHTML = '';
             
@@ -3664,7 +2975,7 @@ function saveGitHubUrl() {
             } else {
                 resultsContainer.style.display = 'none';
                 const carDetails = document.getElementById('carDetails');
-                carDetails.innerHTML = `<p>${currentLanguage === 'ar' ? 'لا توجد سيارة تطابق معايير البحث' : 'No car matches search criteria'}</p>`;
+                carDetails.innerHTML = `<p>لا توجد سيارة تطابق معايير البحث</p>`;
             }
         }
 
@@ -3674,16 +2985,16 @@ function saveGitHubUrl() {
             let deliveriesHtml = '';
             if (carDeliveries.length > 0) {
                 deliveriesHtml = `
-                    <h4>${currentLanguage === 'ar' ? 'حركات السيارة' : 'Car Movements'}</h4>
+                    <h4>حركات السيارة</h4>
                     <table class="data-table">
                         <thead>
                             <tr>
-                                <th>${currentLanguage === 'ar' ? 'اسم السائق' : 'Driver Name'}</th>
-                                <th>${currentLanguage === 'ar' ? 'رقم الموبايل' : 'Phone Number'}</th>
-                                <th>${currentLanguage === 'ar' ? 'اسم المطعم' : 'Restaurant Name'}</th>
-                                <th>${currentLanguage === 'ar' ? 'تاريخ الاستلام' : 'Receive Date'}</th>
-                                <th>${currentLanguage === 'ar' ? 'تاريخ التسليم' : 'Delivery Date'}</th>
-                                <th>${currentLanguage === 'ar' ? 'ملاحظات' : 'Notes'}</th>
+                                <th>اسم السائق</th>
+                                <th>رقم الموبايل</th>
+                                <th>اسم المطعم</th>
+                                <th>تاريخ الاستلام</th>
+                                <th>تاريخ التسليم</th>
+                                <th>ملاحظات</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -3701,19 +3012,20 @@ function saveGitHubUrl() {
                     </table>
                 `;
             } else {
-                deliveriesHtml = `<p>${currentLanguage === 'ar' ? 'لا توجد حركات مسجلة لهذه السيارة' : 'No movements recorded for this car'}</p>`;
+                deliveriesHtml = `<p>لا توجد حركات مسجلة لهذه السيارة</p>`;
             }
             
             const carDetails = document.getElementById('carDetails');
             carDetails.innerHTML = `
-                <h3>${currentLanguage === 'ar' ? 'تفاصيل السيارة:' : 'Car Details:'} ${car.number}</h3>
+                <h3>تفاصيل السيارة: ${car.number}</h3>
                 <div class="car-info">
-                    <p><strong>${currentLanguage === 'ar' ? 'نوع السيارة:' : 'Car Type:'}</strong> ${car.type}</p>
-                    <p><strong>${currentLanguage === 'ar' ? 'موديل السيارة:' : 'Car Model:'}</strong> ${car.model}</p>
-                    <p><strong>${currentLanguage === 'ar' ? 'سنة الصنع:' : 'Manufacturing Year:'}</strong> ${car.year}</p>
-                    <p><strong>${currentLanguage === 'ar' ? 'تاريخ انتهاء الترخيص:' : 'License Expiry:'}</strong> ${car.licenseExpiry}</p>
-                    <p><strong>${currentLanguage === 'ar' ? 'تاريخ انتهاء ترخيص الإعلان:' : 'Ad License Expiry:'}</strong> ${car.adLicenseExpiry || '-'}</p>
-                    <p><strong>${currentLanguage === 'ar' ? 'الحالة:' : 'Status:'}</strong> ${car.status}</p>
+                    <p><strong>نوع السيارة:</strong> ${car.type}</p>
+                    <p><strong>موديل السيارة:</strong> ${car.model}</p>
+                    <p><strong>سنة الصنع:</strong> ${car.year}</p>
+                    <p><strong>تاريخ انتهاء السيارة:</strong> ${car.licenseExpiry}</p>
+                    <p><strong>تاريخ انتهاء ترخيص الإعلان:</strong> ${car.adLicenseExpiry || '-'}</p>
+                    <p><strong>تاريخ انتهاء ترخيص البلدية:</strong> ${car.municipalityLicenseExpiry || '-'}</p>
+                    <p><strong>الحالة:</strong> ${car.status}</p>
                 </div>
                 ${deliveriesHtml}
             `;
@@ -3815,10 +3127,10 @@ function saveGitHubUrl() {
                 <head>
                     <title>Print</title>
                     <style>
-                        body { font-family: Arial, sans-serif; direction: ${currentLanguage === 'ar' ? 'rtl' : 'ltr'}; }
+                        body { font-family: Arial, sans-serif; direction: rtl; }
                         h1 { text-align: center; margin-bottom: 20px; }
                         table { width: 100%; border-collapse: collapse; }
-                        th, td { border: 1px solid #000; padding: 8px; text-align: ${currentLanguage === 'ar' ? 'right' : 'left'}; }
+                        th, td { border: 1px solid #000; padding: 8px; text-align: right; }
                         th { background-color: #f2f2f2; }
                     </style>
                 </head>
@@ -3836,9 +3148,9 @@ function saveGitHubUrl() {
         function printCarHistory() {
             const carDetails = document.getElementById('carDetails');
             if (carDetails.innerHTML.trim() !== '') {
-                printElement(carDetails, currentLanguage === 'ar' ? 'كشف السيارة' : 'Car Report');
+                printElement(carDetails, 'كشف السيارة');
             } else {
-                alert(currentLanguage === 'ar' ? 'لا توجد بيانات للطباعة' : 'No data to print');
+                alert('لا توجد بيانات للطباعة');
             }
         }
 
@@ -3850,10 +3162,10 @@ function saveGitHubUrl() {
                 <head>
                     <title>Print</title>
                     <style>
-                        body { font-family: Arial, sans-serif; direction: ${currentLanguage === 'ar' ? 'rtl' : 'ltr'}; }
+                        body { font-family: Arial, sans-serif; direction: rtl; }
                         h1 { text-align: center; margin-bottom: 20px; }
                         table { width: 100%; border-collapse: collapse; margin-bottom: 20px; }
-                        th, td { border: 1px solid #000; padding: 8px; text-align: ${currentLanguage === 'ar' ? 'right' : 'left'}; }
+                        th, td { border: 1px solid #000; padding: 8px; text-align: right; }
                         th { background-color: #f2f2f2; }
                     </style>
                 </head>
@@ -3895,9 +3207,9 @@ function saveGitHubUrl() {
         function exportCarHistoryPDF() {
             const carDetails = document.getElementById('carDetails');
             if (carDetails.innerHTML.trim() !== '') {
-                exportElementToPDF(carDetails, currentLanguage === 'ar' ? 'كشف السيارة' : 'Car Report');
+                exportElementToPDF(carDetails, 'كشف السيارة');
             } else {
-                alert(currentLanguage === 'ar' ? 'لا توجد بيانات للتصدير' : 'No data to export');
+                alert('لا توجد بيانات للتصدير');
             }
         }
 
@@ -3919,7 +3231,7 @@ function saveGitHubUrl() {
         function exportTableToExcel(data, title) {
             try {
                 if (!data || (Array.isArray(data) && data.length === 0)) {
-                    alert(currentLanguage === 'ar' ? 'لا توجد بيانات للتصدير' : 'No data to export');
+                    alert('لا توجد بيانات للتصدير');
                     return;
                 }
 
@@ -3975,17 +3287,15 @@ function saveGitHubUrl() {
                     }
                 }
 
-                if (currentLanguage === 'ar') {
-                    if (!ws['!views']) ws['!views'] = [];
-                    ws['!views'].push({ rightToLeft: true });
-                }
+                if (!ws['!views']) ws['!views'] = [];
+                ws['!views'].push({ rightToLeft: true });
 
                 XLSX.utils.book_append_sheet(wb, ws, "Data");
                 XLSX.writeFile(wb, `${title}.xlsx`);
                 
             } catch (error) {
                 console.error('Error exporting to Excel:', error);
-                alert(currentLanguage === 'ar' ? 'حدث خطأ أثناء التصدير' : 'Error occurred during export');
+                alert('حدث خطأ أثناء التصدير');
             }
         }
 
@@ -3995,10 +3305,10 @@ function saveGitHubUrl() {
                 const tables = carDetails.getElementsByTagName('table');
                 if (tables.length > 0) {
                     const data = tableToJSON(tables[0]);
-                    exportTableToExcel(data, currentLanguage === 'ar' ? 'كشف السيارة' : 'Car Report');
+                    exportTableToExcel(data, 'كشف السيارة');
                 }
             } else {
-                alert(currentLanguage === 'ar' ? 'لا توجد بيانات للتصدير' : 'No data to export');
+                alert('لا توجد بيانات للتصدير');
             }
         }
 
@@ -4059,7 +3369,7 @@ function saveGitHubUrl() {
             if (expiringLicenses.length === 0 && expiringAdLicenses.length === 0 && 
                 expiredLicenses.length === 0 && expiredAdLicenses.length === 0) {
                 const row = document.createElement('tr');
-                row.innerHTML = `<td colspan="4" style="text-align: center;">${currentLanguage === 'ar' ? 'لا توجد تراخيص منتهية' : 'No expired licenses'}</td>`;
+                row.innerHTML = `<td colspan="4" style="text-align: center;">لا توجد تراخيص منتهية</td>`;
                 tbody.appendChild(row);
                 return;
             }
@@ -4078,9 +3388,9 @@ function saveGitHubUrl() {
                 const row = document.createElement('tr');
                 row.innerHTML = `
                     <td>${car.number}</td>
-                    <td>${currentLanguage === 'ar' ? 'ترخيص السيارة' : 'Car License'}</td>
+                    <td>ترخيص السيارة</td>
                     <td>${car.licenseExpiry}</td>
-                    <td><span class="days-remaining ${daysClass}">${daysRemaining} ${currentLanguage === 'ar' ? 'يوم' : 'days'}</span></td>
+                    <td><span class="days-remaining ${daysClass}">${daysRemaining} يوم</span></td>
                 `;
                 tbody.appendChild(row);
             });
@@ -4099,9 +3409,9 @@ function saveGitHubUrl() {
                 const row = document.createElement('tr');
                 row.innerHTML = `
                     <td>${car.number}</td>
-                    <td>${currentLanguage === 'ar' ? 'ترخيص الإعلان' : 'Ad License'}</td>
+                    <td>ترخيص الإعلان</td>
                     <td>${car.adLicenseExpiry}</td>
-                    <td><span class="days-remaining ${daysClass}">${daysRemaining} ${currentLanguage === 'ar' ? 'يوم' : 'days'}</span></td>
+                    <td><span class="days-remaining ${daysClass}">${daysRemaining} يوم</span></td>
                 `;
                 tbody.appendChild(row);
             });
@@ -4113,9 +3423,9 @@ function saveGitHubUrl() {
                 const row = document.createElement('tr');
                 row.innerHTML = `
                     <td>${car.number}</td>
-                    <td>${currentLanguage === 'ar' ? 'ترخيص السيارة' : 'Car License'}</td>
+                    <td>ترخيص السيارة</td>
                     <td>${car.licenseExpiry}</td>
-                    <td><span class="days-remaining days-expired">-${daysRemaining} ${currentLanguage === 'ar' ? 'يوم' : 'days'}</span></td>
+                    <td><span class="days-remaining days-expired">-${daysRemaining} يوم</span></td>
                 `;
                 tbody.appendChild(row);
             });
@@ -4127,9 +3437,9 @@ function saveGitHubUrl() {
                 const row = document.createElement('tr');
                 row.innerHTML = `
                     <td>${car.number}</td>
-                    <td>${currentLanguage === 'ar' ? 'ترخيص الإعلان' : 'Ad License'}</td>
+                    <td>ترخيص الإعلان</td>
                     <td>${car.adLicenseExpiry}</td>
-                    <td><span class="days-remaining days-expired">-${daysRemaining} ${currentLanguage === 'ar' ? 'يوم' : 'days'}</span></td>
+                    <td><span class="days-remaining days-expired">-${daysRemaining} يوم</span></td>
                 `;
                 tbody.appendChild(row);
             });
@@ -4170,7 +3480,7 @@ function saveGitHubUrl() {
                 
                 alertsData.push({
                     'رقم السيارة': car.number,
-                    'نوع الترخيص': currentLanguage === 'ar' ? 'ترخيص السيارة' : 'Car License',
+                    'نوع الترخيص': 'ترخيص السيارة',
                     'تاريخ الانتهاء': car.licenseExpiry,
                     'الأيام المتبقية': daysRemaining
                 });
@@ -4182,7 +3492,7 @@ function saveGitHubUrl() {
                 
                 alertsData.push({
                     'رقم السيارة': car.number,
-                    'نوع الترخيص': currentLanguage === 'ar' ? 'ترخيص الإعلان' : 'Ad License',
+                    'نوع الترخيص': 'ترخيص الإعلان',
                     'تاريخ الانتهاء': car.adLicenseExpiry,
                     'الأيام المتبقية': daysRemaining
                 });
@@ -4194,7 +3504,7 @@ function saveGitHubUrl() {
                 
                 alertsData.push({
                     'رقم السيارة': car.number,
-                    'نوع الترخيص': currentLanguage === 'ar' ? 'ترخيص السيارة (منتهي)' : 'Car License (Expired)',
+                    'نوع الترخيص': 'ترخيص السيارة (منتهي)',
                     'تاريخ الانتهاء': car.licenseExpiry,
                     'الأيام المتبقية': -daysRemaining
                 });
@@ -4206,18 +3516,18 @@ function saveGitHubUrl() {
                 
                 alertsData.push({
                     'رقم السيارة': car.number,
-                    'نوع الترخيص': currentLanguage === 'ar' ? 'ترخيص الإعلان (منتهي)' : 'Ad License (Expired)',
+                    'نوع الترخيص': 'ترخيص الإعلان (منتهي)',
                     'تاريخ الانتهاء': car.adLicenseExpiry,
                     'الأيام المتبقية': -daysRemaining
                 });
             });
             
             if (alertsData.length === 0) {
-                alert(currentLanguage === 'ar' ? 'لا توجد تنبيهات للتصدير' : 'No alerts to export');
+                alert('لا توجد تنبيهات للتصدير');
                 return;
             }
             
-            exportTableToExcel(alertsData, currentLanguage === 'ar' ? 'التنبيهات' : 'Alerts');
+            exportTableToExcel(alertsData, 'التنبيهات');
         }
 
         function generateReport(type) {
@@ -4226,8 +3536,8 @@ function saveGitHubUrl() {
             let description = '';
             
             if (type === 'monthly') {
-                title = currentLanguage === 'ar' ? 'تقرير شهري' : 'Monthly Report';
-                description = currentLanguage === 'ar' ? 'التسليمات خلال الشهر الحالي' : 'Deliveries in current month';
+                title = 'تقرير شهري';
+                description = 'التسليمات خلال الشهر الحالي';
                 reportData = deliveriesData.filter(d => {
                     const receiveDate = new Date(d.receiveDate);
                     const currentMonth = new Date().getMonth();
@@ -4235,16 +3545,16 @@ function saveGitHubUrl() {
                     return receiveDate.getMonth() === currentMonth && receiveDate.getFullYear() === currentYear;
                 });
             } else if (type === 'yearly') {
-                title = currentLanguage === 'ar' ? 'تقرير سنوي' : 'Yearly Report';
-                description = currentLanguage === 'ar' ? 'التسليمات خلال السنة الحالية' : 'Deliveries in current year';
+                title = 'تقرير سنوي';
+                description = 'التسليمات خلال السنة الحالية';
                 reportData = deliveriesData.filter(d => {
                     const receiveDate = new Date(d.receiveDate);
                     const currentYear = new Date().getFullYear();
                     return receiveDate.getFullYear() === currentYear;
                 });
             } else if (type === 'expiry') {
-                title = currentLanguage === 'ar' ? 'تقرير المواعيد المنتهية' : 'Expiry Report';
-                description = currentLanguage === 'ar' ? 'التراخيص المنتهية خلال 30 يوم' : 'Licenses expiring in 30 days';
+                title = 'تقرير المواعيد المنتهية';
+                description = 'التراخيص المنتهية خلال 30 يوم';
                 const today = new Date();
                 const nextMonth = new Date();
                 nextMonth.setDate(today.getDate() + 30);
@@ -4261,7 +3571,7 @@ function saveGitHubUrl() {
                 reportResults.innerHTML = `
                     <h3>${title}</h3>
                     <p>${description}</p>
-                    <p>${currentLanguage === 'ar' ? 'لا توجد بيانات لعرضها' : 'No data to display'}</p>
+                    <p>لا توجد بيانات لعرضها</p>
                 `;
                 return;
             }
@@ -4272,10 +3582,10 @@ function saveGitHubUrl() {
                 <table class="data-table">
                     <thead>
                         <tr>
-                            <th>${currentLanguage === 'ar' ? 'رقم السيارة' : 'Car Number'}</th>
-                            <th>${currentLanguage === 'ar' ? 'نوع السيارة' : 'Car Type'}</th>
-                            <th>${currentLanguage === 'ar' ? 'موديل السيارة' : 'Car Model'}</th>
-                            <th>${type === 'expiry' ? (currentLanguage === 'ar' ? 'تاريخ انتهاء الترخيص' : 'License Expiry') : (currentLanguage === 'ar' ? 'تاريخ الاستلام' : 'Receive Date')}</th>
+                            <th>رقم السيارة</th>
+                            <th>نوع السيارة</th>
+                            <th>موديل السيارة</th>
+                            <th>${type === 'expiry' ? 'تاريخ انتهاء الترخيص' : 'تاريخ الاستلام'}</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -4294,17 +3604,17 @@ function saveGitHubUrl() {
 
         function generateReportData() {
             return [
-                [currentLanguage === 'ar' ? 'إجمالي السيارات' : 'Total Cars', carsData.length],
-                [currentLanguage === 'ar' ? 'السيارات النشطة' : 'Active Cars', carsData.filter(car => car.status === 'نشطة').length],
-                [currentLanguage === 'ar' ? 'السيارات تحت الصيانة' : 'Cars Under Maintenance', carsData.filter(car => car.status === 'تحت الصيانة').length],
-                [currentLanguage === 'ar' ? 'إجمالي المواقع' : 'Total Locations', restaurantsData.length],
-                [currentLanguage === 'ar' ? 'عمليات التسليم النشطة' : 'Active Deliveries', deliveriesData.filter(d => !d.deliveryDate).length]
+                ['إجمالي السيارات', carsData.length],
+                ['السيارات النشطة', carsData.filter(car => car.status === 'نشطة').length],
+                ['السيارات تحت الصيانة', carsData.filter(car => car.status === 'تحت الصيانة').length],
+                ['إجمالي المواقع', restaurantsData.length],
+                ['عمليات التسليم النشطة', deliveriesData.filter(d => !d.deliveryDate).length]
             ];
         }
 
         function importFromExcel(type, file) {
             if (!file) {
-                alert(currentLanguage === 'ar' ? 'يرجى اختيار ملف' : 'Please select a file');
+                alert('يرجى اختيار ملف');
                 return;
             }
             
@@ -4330,9 +3640,11 @@ function saveGitHubUrl() {
                     jsonData.forEach(item => {
                         let licenseExpiry = item['تاريخ انتهاء الترخيص'] || item['License Expiry'];
                         let adLicenseExpiry = item['تاريخ انتهاء ترخيص الإعلان'] || item['Ad License Expiry'];
+                        let municipalityLicenseExpiry = item['تاريخ انتهاء ترخيص البلدية'] || item['Municipality License Expiry'];
                         
                         licenseExpiry = formatExcelDate(licenseExpiry);
                         adLicenseExpiry = formatExcelDate(adLicenseExpiry);
+                        municipalityLicenseExpiry = formatExcelDate(municipalityLicenseExpiry);
                         
                         const newCar = {
                             id: carsData.length > 0 ? Math.max(...carsData.map(c => c.id)) + 1 : 1,
@@ -4342,6 +3654,7 @@ function saveGitHubUrl() {
                             year: parseInt(item['سنة الصنع'] || item['Manufacturing Year']),
                             licenseExpiry: licenseExpiry,
                             adLicenseExpiry: adLicenseExpiry || null,
+                            municipalityLicenseExpiry: municipalityLicenseExpiry || null,
                             status: item['الحالة'] || item['Status'] || 'نشطة'
                         };
                         
@@ -4353,7 +3666,7 @@ function saveGitHubUrl() {
                     updateStats();
                     updateAlertsBar();
                     checkLicenseExpiry();
-                    alert(currentLanguage === 'ar' ? 'تم استيراد بيانات السيارات بنجاح' : 'Cars data imported successfully');
+                    alert('تم استيراد بيانات السيارات بنجاح');
                 } else if (type === 'restaurants') {
                     jsonData.forEach(item => {
                         const newRestaurant = {
@@ -4369,7 +3682,7 @@ function saveGitHubUrl() {
                     saveAllData();
                     loadRestaurantsData();
                     updateStats();
-                    alert(currentLanguage === 'ar' ? 'تم استيراد بيانات المواقع بنجاح' : 'Locations data imported successfully');
+                    alert('تم استيراد بيانات المواقع بنجاح');
                 }
             };
             
@@ -4422,9 +3735,9 @@ function saveGitHubUrl() {
             const wb = XLSX.utils.book_new();
             
             const carsData = [
-                ['رقم السيارة', 'نوع السيارة', 'موديل السيارة', 'سنة الصنع', 'تاريخ انتهاء الترخيص', 'تاريخ انتهاء ترخيص الإعلان', 'الحالة'],
-                ['KW-1234', 'تويوتا', 'كامري', 2020, '2026-12-15', '2026-06-15', 'نشطة'],
-                ['KW-5678', 'هيونداي', 'النترا', 2021, '2026-01-20', '2026-07-20', 'نشطة']
+                ['رقم السيارة', 'نوع السيارة', 'موديل السيارة', 'سنة الصنع', 'تاريخ انتهاء الترخيص', 'تاريخ انتهاء ترخيص الإعلان', 'تاريخ انتهاء ترخيص البلدية', 'الحالة'],
+                ['KW-1234', 'تويوتا', 'كامري', 2020, '2026-12-15', '2026-06-15', '2026-09-15', 'نشطة'],
+                ['KW-5678', 'هيونداي', 'النترا', 2021, '2026-01-20', '2026-07-20', '2026-10-20', 'نشطة']
             ];
             
             const ws = XLSX.utils.aoa_to_sheet(carsData);
@@ -4436,7 +3749,8 @@ function saveGitHubUrl() {
             ws['!cols'][3] = { width: 12 };
             ws['!cols'][4] = { width: 20 };
             ws['!cols'][5] = { width: 25 };
-            ws['!cols'][6] = { width: 15 };
+            ws['!cols'][6] = { width: 25 };
+            ws['!cols'][7] = { width: 15 };
             
             for (let R = 1; R <= 2; R++) {
                 const licenseCell = XLSX.utils.encode_cell({r: R, c: 4});
@@ -4448,6 +3762,11 @@ function saveGitHubUrl() {
                 if (!ws[adLicenseCell]) ws[adLicenseCell] = {};
                 ws[adLicenseCell].t = 'd';
                 ws[adLicenseCell].z = 'yyyy-mm-dd';
+                
+                const municipalityCell = XLSX.utils.encode_cell({r: R, c: 6});
+                if (!ws[municipalityCell]) ws[municipalityCell] = {};
+                ws[municipalityCell].t = 'd';
+                ws[municipalityCell].z = 'yyyy-mm-dd';
             }
             
             const instructions = [
@@ -4477,6 +3796,48 @@ function saveGitHubUrl() {
             
             XLSX.utils.book_append_sheet(wb, ws, "Cars Template");
             XLSX.writeFile(wb, "Cars_Template.xlsx");
+        }
+
+        function showSyncNotification(message, type) {
+            let notification = document.getElementById('syncNotification');
+            if (!notification) {
+                notification = document.createElement('div');
+                notification.id = 'syncNotification';
+                notification.style.cssText = `
+                    position: fixed;
+                    top: 20px;
+                    right: 20px;
+                    padding: 15px 20px;
+                    border-radius: 8px;
+                    color: white;
+                    font-weight: bold;
+                    z-index: 10000;
+                    transition: all 0.3s ease;
+                    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+                    max-width: 300px;
+                    text-align: center;
+                `;
+                document.body.appendChild(notification);
+            }
+            
+            if (type === 'success') {
+                notification.style.backgroundColor = '#2ecc71';
+            } else if (type === 'error') {
+                notification.style.backgroundColor = '#e74c3c';
+            } else {
+                notification.style.backgroundColor = '#3498db';
+            }
+            
+            notification.textContent = message;
+            notification.style.display = 'block';
+            notification.style.opacity = '1';
+            
+            setTimeout(() => {
+                notification.style.opacity = '0';
+                setTimeout(() => {
+                    notification.style.display = 'none';
+                }, 300);
+            }, 3000);
         }
     </script>
 </body>
