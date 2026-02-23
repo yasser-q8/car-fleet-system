@@ -8,10 +8,11 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.28/jspdf.plugin.autotable.min.js"></script>
     <script src="https://cdn.sheetjs.com/xlsx-0.19.3/package/dist/xlsx.full.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
     <style>
         :root {
-            --primary-orange: #FF7F00;
+            --primary-red: #FF0000;
             --phosphorescent-green: #39FF14;
             --light-sky-blue: #87CEEB;
             --white: #FFFFFF;
@@ -39,7 +40,7 @@
         }
 
         header {
-            background: linear-gradient(135deg, var(--primary-orange), var(--phosphorescent-green));
+            background: var(--primary-red);
             color: white;
             padding: 20px 0;
             border-radius: 10px;
@@ -63,11 +64,20 @@
             max-width: 60px;
             max-height: 60px;
             object-fit: contain;
+            border-radius: 50%;
+            border: 2px solid white;
         }
 
         .logo {
             font-size: 24px;
             font-weight: bold;
+            color: white;
+        }
+
+        .company-name-header {
+            font-size: 16px;
+            margin-top: 5px;
+            color: white;
         }
 
         .nav-tabs {
@@ -92,7 +102,7 @@
         }
 
         .nav-tab.active {
-            background-color: var(--primary-orange);
+            background-color: var(--primary-red);
         }
 
         .content-section {
@@ -109,7 +119,7 @@
         }
 
         .section-title {
-            color: var(--primary-orange);
+            color: var(--primary-red);
             margin-bottom: 20px;
             padding-bottom: 10px;
             border-bottom: 2px solid var(--phosphorescent-green);
@@ -168,7 +178,7 @@
         }
 
         .btn-primary {
-            background-color: var(--primary-orange);
+            background-color: var(--primary-red);
             color: white;
         }
 
@@ -231,21 +241,6 @@
             background-color: #f8d7da;
             color: #721c24;
             border: 1px solid #f5c6cb;
-        }
-
-        .language-switcher {
-            position: absolute;
-            top: 20px;
-            left: 20px;
-        }
-
-        .lang-btn {
-            background-color: var(--dark-blue);
-            color: white;
-            border: none;
-            padding: 8px 15px;
-            border-radius: 5px;
-            cursor: pointer;
         }
 
         .compact-form {
@@ -327,7 +322,7 @@
         .stat-number {
             font-size: 2em;
             font-weight: bold;
-            color: var(--primary-orange);
+            color: var(--primary-red);
         }
 
         .error-message {
@@ -395,7 +390,7 @@
         .file-input-label {
             display: inline-block;
             padding: 10px 15px;
-            background-color: var(--primary-orange);
+            background-color: var(--primary-red);
             color: white;
             border-radius: 5px;
             cursor: pointer;
@@ -403,44 +398,89 @@
         }
 
         .file-input-label:hover {
-            background-color: #e67300;
+            background-color: #cc0000;
         }
 
+        /* توقيع المطور الجديد */
         .signature-card {
             position: fixed;
             bottom: 20px;
             left: 20px;
-            background: linear-gradient(135deg, #FF746C, #FF6E00, #80EF80,#2196F3);
+            background: linear-gradient(135deg, #FF6E00, #2196F3);
             color: white;
-            padding: 14px 24px;
-            border-radius: 6px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            padding: 10.5px 17.5px;
+            border-radius: 8.5px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            font-size: 1rem;
+            font-size: 0.8rem;
             font-weight: 600;
             z-index: 1000;
             animation: float 6s ease-in-out infinite;
             transition: all 0.3s ease;
             cursor: pointer;
-            border: 1px solid rgba(255,255,255,0.2);
-            transform: scale(1);
-            transform-origin: left bottom;
+            border: 2px solid rgba(255,255,255,0.2);
         }
-        .signature-card:hover { transform: scale(0.55); box-shadow: 0 6px 18px rgba(0,0,0,0.4); }
-        @keyframes float { 0% { transform: scale(1) translateY(0px); } 50% { transform: scale(1) translateY(-8px); } 100% { transform: scale(1) translateY(0px); } }
+
+        .signature-card:hover { 
+            transform: scale(1.05); 
+            box-shadow: 0 12px 35px rgba(0,0,0,0.4); 
+        }
+
+        @keyframes float { 
+            0% { transform: translateY(0px); } 
+            50% { transform: translateY(-15px); } 
+            100% { transform: translateY(0px); } 
+        }
+
         .signature-card::before {
             content: '';
             position: absolute;
-            top: -1px; left: -1px; right: -1px; bottom: -1px;
-            background: linear-gradient(135deg, #FF746C, #FF6E00, #80EF80,#2196F3);
-            border-radius: 7px;
+            top: -2px; left: -2px; right: -2px; bottom: -2px;
+            background: linear-gradient(135deg, #80EF80, #2196F3);
+            border-radius: 14px;
             z-index: -1;
             animation: borderGlow 3s linear infinite;
             background-size: 400%;
         }
-        @keyframes borderGlow { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
-        .signature-card .name { font-size: 0.90rem; font-weight: 700; margin-bottom: 1px; text-shadow: 1px 1px 2px rgba(0,0,0,0.3); }
-        .signature-card .title { font-size: 0.65rem; opacity: 0.9; font-weight: 500; }
+
+        @keyframes borderGlow { 
+            0% { background-position: 0% 50%; } 
+            50% { background-position: 100% 50%; } 
+            100% { background-position: 0% 50%; } 
+        }
+
+        .signature-card .name { 
+            font-size: 0.95rem; 
+            font-weight: 700; 
+            margin-bottom: 5px; 
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.3); 
+        }
+
+        .signature-card .title { 
+            font-size: 0.7rem; 
+            opacity: 0.9; 
+            font-weight: 500; 
+        }
+
+        @media (max-width: 768px) { 
+            .signature-card { 
+                position: relative; 
+                bottom: auto; 
+                left: auto; 
+                margin: 20px auto 0; 
+                width: fit-content; 
+                animation: none; 
+            } 
+            .signature-card:hover { 
+                transform: none; 
+            } 
+        }
+
+        @media print {
+            .signature-card {
+                display: none;
+            }
+        }
 
         .alerts-table {
             width: 100%;
@@ -507,7 +547,7 @@
         .receipt-header {
             text-align: center;
             margin-bottom: 30px;
-            border-bottom: 2px solid var(--primary-orange);
+            border-bottom: 2px solid var(--primary-red);
             padding-bottom: 20px;
         }
         
@@ -516,10 +556,12 @@
             max-height: 80px;
             object-fit: contain;
             margin-bottom: 15px;
+            border-radius: 50%;
+            border: 2px solid var(--primary-red);
         }
         
         .receipt-title {
-            color: var(--primary-orange);
+            color: var(--primary-red);
             font-size: 22px;
             font-weight: bold;
             margin-bottom: 8px;
@@ -535,7 +577,7 @@
         }
         
         .receipt-details h3 {
-            color: var(--primary-orange);
+            color: var(--primary-red);
             margin-bottom: 15px;
             border-bottom: 1px solid #eee;
             padding-bottom: 10px;
@@ -719,6 +761,7 @@
         .alerts-count {
             display: flex;
             gap: 15px;
+            flex-wrap: wrap;
         }
         
         .alert-item {
@@ -731,13 +774,14 @@
             background-color: #dc3545;
             color: white;
             border-radius: 50%;
-            width: 20px;
-            height: 20px;
+            width: 40px;
+            height: 40px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 12px;
+            font-size: 18px;
             font-weight: bold;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
         }
 
         .receipt-details .data-table {
@@ -778,7 +822,7 @@
             align-items: center;
             gap: 20px;
             margin-bottom: 15px;
-            border-bottom: 2px solid var(--primary-orange);
+            border-bottom: 2px solid var(--primary-red);
             padding-bottom: 10px;
         }
 
@@ -811,6 +855,67 @@
             padding-top: 10px;
         }
 
+        /* قالب PDF المخفي */
+        .pdf-template {
+            position: fixed;
+            left: -10000px;
+            top: -10000px;
+            width: 794px;
+            height: 1123px;
+            background: white;
+            padding: 10px;
+            box-sizing: border-box;
+            z-index: -1000;
+            font-size: 12px;
+            font-family: 'Times New Roman', serif;
+        }
+
+        .pdf-header {
+            padding: 5px;
+            margin-bottom: 10px;
+            padding-left: 30px;
+        }
+
+        .pdf-header-row {
+            text-align: center;
+        }
+
+        .pdf-logo {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            border: 2px solid var(--primary-red);
+            margin: 0 auto 5px;
+            display: block;
+        }
+
+        .pdf-title {
+            color: var(--primary-red);
+            margin: 0;
+            font-size: 18px;
+        }
+
+        .statement-table {
+            font-size: 10px;
+            border-collapse: collapse;
+            width: calc(100% - 40px);
+            margin-left: 30px;
+        }
+
+        .statement-table th {
+            padding: 4px;
+            border: 1px solid #000;
+            text-align: center;
+            background: var(--primary-red);
+            color: white;
+        }
+
+        .statement-table td {
+            padding: 4px;
+            border: 1px solid #000;
+            text-align: center;
+        }
+
         @media (max-width: 768px) {
             .receipt-details .data-table th,
             .receipt-details .data-table td {
@@ -822,9 +927,7 @@
                 display: block;
                 margin-bottom: 10px;
             }
-        }
-
-        @media (max-width: 768px) {
+            
             .header-content {
                 flex-direction: column;
                 text-align: center;
@@ -860,20 +963,6 @@
                 grid-template-columns: repeat(2, 1fr);
             }
             
-            .signature-card {
-                position: relative;
-                bottom: auto;
-                left: auto;
-                margin: 20px auto 0;
-                width: fit-content;
-                animation: none;
-                transform: scale(0.8);
-            }
-            
-            .signature-card:hover {
-                transform: scale(0.85);
-            }
-            
             .car-sketch {
                 width: 300px;
                 height: 150px;
@@ -885,34 +974,38 @@
             }
             
             .alerts-count {
-                flex-wrap: wrap;
                 justify-content: center;
+            }
+            
+            .alert-badge {
+                width: 30px;
+                height: 30px;
+                font-size: 14px;
             }
         }
     </style>
 </head>
 <body>
-    <!-- توقيع المطور -->
+    <!-- توقيع المطور (التنسيق الجديد) -->
     <div class="signature-card">
         <div class="name">Yasser Elkhateeb</div>
         <div class="title">مطور البرنامج 67011143</div>
     </div>
 
-    <!-- التطبيق الرئيسي (بدون شاشة دخول) -->
+    <!-- التطبيق الرئيسي -->
     <div id="appScreen">
         <div class="container">
             <header>
                 <div class="header-content">
                     <div class="logo-section">
-                        <img id="companyLogoHeader" src="" alt="شعار الشركة" class="company-logo-header" style="display: none;">
+                        <img id="companyLogoHeader" src="https://i.postimg.cc/NM2zJWZD/NAIF-LOGO.jpg" alt="شعار الشركة" class="company-logo-header">
                         <div>
                             <div class="logo">نظام إدارة أسطول السيارات</div>
-                            <div id="companyNameHeader" style="font-size: 16px; margin-top: 5px;"></div>
+                            <div class="company-name-header">شركة نايف للأغذية</div>
                         </div>
                     </div>
                     <div class="user-info">
-                        <span id="userName">مستخدم: مدير النظام</span>
-                        <span id="userRole" class="user-role-badge role-super-admin">(سوبر أدمن)</span>
+                        <span>مدير النظام</span>
                     </div>
                 </div>
             </header>
@@ -968,9 +1061,7 @@
                     <button class="btn btn-secondary" id="exportReport">تصدير التقرير</button>
                 </div>
 
-                <div id="reportResults" style="margin-top: 20px;">
-                    <!-- سيتم عرض نتائج التقارير هنا -->
-                </div>
+                <div id="reportResults" style="margin-top: 20px;"></div>
             </section>
 
             <!-- قسم التنبيهات المفصلة -->
@@ -996,9 +1087,7 @@
                             <th>الأيام المتبقية</th>
                         </tr>
                     </thead>
-                    <tbody id="expiringLicensesTableBody">
-                        <!-- البيانات سيتم إضافتها ديناميكياً -->
-                    </tbody>
+                    <tbody id="expiringLicensesTableBody"></tbody>
                 </table>
             </section>
 
@@ -1043,6 +1132,7 @@
                 <div class="action-buttons">
                     <button class="btn btn-primary" id="sortByLicense">ترتيب حسب انتهاء الترخيص</button>
                     <button class="btn btn-primary" id="sortByAdLicense">ترتيب حسب ترخيص الإعلان</button>
+                    <button class="btn btn-primary" id="sortByMunicipalityLicense">ترتيب حسب ترخيص البلدية</button>
                     <button class="btn btn-secondary" id="printCarsTable">طباعة الجدول</button>
                     <button class="btn btn-secondary" id="exportCarsPDF">تصدير PDF</button>
                     <button class="btn btn-secondary" id="exportCarsExcel">تصدير Excel</button>
@@ -1062,9 +1152,7 @@
                             <th class="no-export">الإجراءات</th>
                         </tr>
                     </thead>
-                    <tbody id="carsTableBody">
-                        <!-- البيانات سيتم إضافتها ديناميكياً -->
-                    </tbody>
+                    <tbody id="carsTableBody"></tbody>
                 </table>
             </section>
 
@@ -1097,9 +1185,9 @@
                         </div>
                         <div class="form-container">
                             <div class="form-group">
-                                <label for="restaurantName">اسم المطعم/المخزن *</label>
-                                <input type="text" id="restaurantName" placeholder="ابحث واختر المطعم">
-                                <div class="error-message" id="restaurantNameError">يجب اختيار مطعم مسجل</div>
+                                <label for="restaurantName">اسم الموقع *</label>
+                                <input type="text" id="restaurantName" placeholder="ابحث واختر الموقع">
+                                <div class="error-message" id="restaurantNameError">يجب اختيار موقع مسجل</div>
                                 <div class="search-results" id="restaurantSearchResults"></div>
                             </div>
                         </div>
@@ -1131,7 +1219,6 @@
                         </div>
                     </div>
                     
-                    <!-- نموذج كروكي السيارة -->
                     <div class="car-sketch-container">
                         <h4>تحديد أماكن الخدوش بالسيارة</h4>
                         <div class="car-sketch" id="carSketch">
@@ -1143,11 +1230,8 @@
                             <div class="car-wheel wheel-rear"></div>
                             <div class="car-direction front-direction">أمام</div>
                             <div class="car-direction rear-direction">خلف</div>
-                            <!-- سيتم إضافة نقاط الخدوش ديناميكياً -->
                         </div>
-                        <div class="scratch-list" id="scratchList">
-                            <!-- قائمة الخدوش ستظهر هنا -->
-                        </div>
+                        <div class="scratch-list" id="scratchList"></div>
                         <button type="button" class="btn btn-secondary" id="clearScratches">مسح جميع الخدوش</button>
                     </div>
                     
@@ -1161,11 +1245,10 @@
                 <div id="receiptForm" style="display: none; margin-bottom: 20px;">
                     <div class="receipt-container">
                         <div class="receipt-header">
-                            <img id="receiptLogo" src="" alt="شعار الشركة" class="receipt-logo">
+                            <img id="receiptLogo" src="https://i.postimg.cc/NM2zJWZD/NAIF-LOGO.jpg" alt="شعار الشركة" class="receipt-logo">
                             <div class="receipt-header-text">
                                 <h1 class="receipt-title">نموذج استلام سيارة</h1>
-                                <div class="receipt-company" id="receiptCompanyName"></div>
-                                <div id="receiptCompanyAddress"></div>
+                                <div class="receipt-company">شركة نايف للأغذية</div>
                             </div>
                         </div>
                         <div class="receipt-details">
@@ -1175,7 +1258,7 @@
                                     <tr>
                                         <th>رقم السيارة</th>
                                         <td id="receiptCarNumber">-</td>
-                                        <th>اسم المطعم/المخزن</th>
+                                        <th>اسم الموقع</th>
                                         <td id="receiptRestaurant">-</td>
                                     </tr>
                                     <tr>
@@ -1205,7 +1288,6 @@
                                 <div class="car-wheel wheel-rear"></div>
                                 <div class="car-direction front-direction">أمام</div>
                                 <div class="car-direction rear-direction">خلف</div>
-                                <!-- سيتم إضافة نقاط الخدوش ديناميكياً -->
                             </div>
                         </div>
                     </div>
@@ -1217,16 +1299,14 @@
                             <th>رقم السيارة</th>
                             <th>اسم السائق</th>
                             <th>رقم الموبايل</th>
-                            <th>اسم المطعم</th>
+                            <th>اسم الموقع</th>
                             <th>تاريخ الاستلام</th>
                             <th>تاريخ التسليم</th>
                             <th>ملاحظات</th>
                             <th class="no-export">الإجراءات</th>
                         </tr>
                     </thead>
-                    <tbody id="deliveryTableBody">
-                        <!-- البيانات سيتم إضافتها ديناميكياً -->
-                    </tbody>
+                    <tbody id="deliveryTableBody"></tbody>
                 </table>
             </section>
 
@@ -1245,52 +1325,69 @@
                     <button class="btn btn-secondary" id="exportHistoryExcel">تصدير Excel</button>
                 </div>
                 
-                <div id="carDetails">
-                    <!-- سيتم ملؤها ديناميكياً -->
-                </div>
+                <div id="carDetails"></div>
             </section>
 
-            <!-- قسم الإعدادات (تم إزالة عنوان الشركة) -->
+            <!-- قسم الإعدادات (تم إزالة جميع الحقول) -->
             <section id="settings" class="content-section">
                 <h2 class="section-title">الإعدادات</h2>
                 
                 <div class="action-buttons">
-                    <label for="importRestaurantsFile" class="file-input-label">استيراد المواقع من Excel</label>
+                    <label for="importRestaurantsFile" class="file-input-label">استيراد مواقع من Excel</label>
                     <input type="file" id="importRestaurantsFile" class="file-input" accept=".xlsx, .xls">
                     <button class="btn btn-primary" id="addRestaurant">إضافة موقع جديد</button>
                 </div>
                 
-                <h3>إعدادات الشركة</h3>
-                <div class="form-group">
-                    <label for="companyName">اسم الشركة</label>
-                    <input type="text" id="companyName" placeholder="أدخل اسم الشركة">
-                </div>
-                <div class="form-group">
-                    <label for="companyLogo">شعار الشركة (رابط)</label>
-                    <input type="text" id="companyLogo" placeholder="أدخل رابط الشعار">
-                </div>
-                <div class="form-group">
-                    <label for="companyInfo">معلومات الشركة</label>
-                    <textarea id="companyInfo" rows="4" placeholder="أدخل معلومات الشركة"></textarea>
-                </div>
-                <button class="btn btn-primary" id="saveCompanySettings">حفظ إعدادات الشركة</button>
-                
-                <h3 style="margin-top: 30px;">إدارة المواقع (المطاعم والمخازن)</h3>
+                <h3>إدارة المواقع</h3>
                 <table class="data-table">
                     <thead>
                         <tr>
                             <th>اسم الموقع</th>
-                            <th>النوع</th>
-                            <th>العنوان</th>
                             <th class="no-export">الإجراءات</th>
                         </tr>
                     </thead>
-                    <tbody id="restaurantsTableBody">
-                        <!-- البيانات سيتم إضافتها ديناميكياً -->
-                    </tbody>
+                    <tbody id="restaurantsTableBody"></tbody>
                 </table>
             </section>
         </div>
+    </div>
+
+    <!-- قالب PDF المخفي (لكشف السيارة) -->
+    <div id="pdf-template" class="pdf-template">
+        <div class="pdf-header">
+            <div class="pdf-header-row">
+                <div style="text-align: center; margin-bottom: 10px;">
+                    <img src="https://i.postimg.cc/NM2zJWZD/NAIF-LOGO.jpg" alt="شعار الشركة" class="pdf-logo">
+                    <h2 class="pdf-title">شركة نايف للأغذية</h2>
+                </div>
+                <h3 style="color: var(--primary-red); margin: 0 0 8px 0; font-size: 16px;">كشف بيانات السيارة</h3>
+                <div style="margin-bottom: 8px; text-align: center;">
+                    <div style="font-size: 14px; font-weight: bold; display: inline-block;">
+                        رقم السيارة: <span id="pdf-car-number"></span>
+                    </div>
+                    <div style="display: inline-block; width: 1cm;"></div>
+                    <div style="font-size: 12px; display: inline-block;">
+                        تاريخ الطباعة: <span id="pdf-print-date"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div id="pdf-car-info" style="margin-bottom: 10px; padding: 8px; background: #f8f9fa; border-radius: 4px; font-size: 11px; padding-left: 30px;"></div>
+        
+        <table class="statement-table" id="pdf-deliveries-table">
+            <thead>
+                <tr>
+                    <th width="12%">تاريخ الاستلام</th>
+                    <th width="12%">تاريخ التسليم</th>
+                    <th width="15%">اسم السائق</th>
+                    <th width="12%">رقم الموبايل</th>
+                    <th width="15%">اسم الموقع</th>
+                    <th width="34%">ملاحظات</th>
+                </tr>
+            </thead>
+            <tbody id="pdf-table-body"></tbody>
+        </table>
     </div>
 
     <!-- نموذج إضافة سيارة -->
@@ -1341,25 +1438,14 @@
         </div>
     </div>
 
-    <!-- نموذج إضافة موقع -->
+    <!-- نموذج إضافة موقع (بدون نوع وعنوان) -->
     <div id="restaurantModal" class="modal">
         <div class="modal-content">
             <span class="close-modal" id="closeRestaurantModal">&times;</span>
             <h2>إضافة موقع جديد</h2>
             <div class="form-group">
-                <label for="newRestaurantName">اسم الموقع</label>
+                <label for="newRestaurantName">اسم الموقع *</label>
                 <input type="text" id="newRestaurantName" placeholder="أدخل اسم الموقع">
-            </div>
-            <div class="form-group">
-                <label for="newRestaurantType">نوع الموقع</label>
-                <select id="newRestaurantType">
-                    <option value="مطعم">مطعم</option>
-                    <option value="مخزن">مخزن</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label for="newRestaurantAddress">العنوان</label>
-                <input type="text" id="newRestaurantAddress" placeholder="أدخل العنوان">
             </div>
             <div class="action-buttons">
                 <button class="btn btn-primary" id="saveRestaurant">حفظ</button>
@@ -1369,7 +1455,7 @@
     </div>
 
     <script>
-        // ========== بيانات السيارات الأولية من الملف المرفق ==========
+        // ========== بيانات السيارات الأولية ==========
         const initialCarsData = [
             { id: 1, number: '16/8826', type: 'تويوتا', model: '1994', year: 1994, licenseExpiry: '2026-03-10', adLicenseExpiry: '2026-06-17', municipalityLicenseExpiry: '2026-03-10', status: 'نشطة' },
             { id: 2, number: '8/5056', type: 'تويوتا', model: '1996', year: 1996, licenseExpiry: '2026-08-10', adLicenseExpiry: null, municipalityLicenseExpiry: null, status: 'نشطة' },
@@ -1404,20 +1490,27 @@
             { id: 31, number: '14/11023', type: 'دايهاتسو', model: '2016', year: 2016, licenseExpiry: '2026-10-15', adLicenseExpiry: null, municipalityLicenseExpiry: null, status: 'نشطة' },
             { id: 32, number: '13/16479', type: 'دايهاتسو', model: '2016', year: 2016, licenseExpiry: '2026-11-29', adLicenseExpiry: null, municipalityLicenseExpiry: null, status: 'نشطة' },
             { id: 33, number: '22/29845', type: 'تويوتا', model: '2023', year: 2023, licenseExpiry: '2026-11-08', adLicenseExpiry: null, municipalityLicenseExpiry: null, status: 'نشطة' },
-            { id: 34, number: '22/30275', type: 'تويوتا', model: '2023', year: 2023, licenseExpiry: '2026-11-08', adLicenseExpiry: null, municipalityLicenseExpiry: null, status: 'نشطة' }
+            { id: 34, number: '22/30275', type: 'تويوتا', model: '2023', year: 2023, licenseExpiry: '2026-01-08', adLicenseExpiry: null, municipalityLicenseExpiry: null, status: 'نشطة' }
+        ];
+
+        // ========== المواقع الثابتة ==========
+        const initialRestaurantsData = [
+            { id: 1, name: 'مخازن الشويخ الصناعية' },
+            { id: 2, name: 'مخازن امغرة' },
+            { id: 3, name: 'الادارة' }
         ];
 
         // ========== بيانات التطبيق ==========
         let carsData = JSON.parse(localStorage.getItem('carsData')) || initialCarsData;
         let deliveriesData = JSON.parse(localStorage.getItem('deliveriesData')) || [];
-        let restaurantsData = JSON.parse(localStorage.getItem('restaurantsData')) || [];
+        let restaurantsData = JSON.parse(localStorage.getItem('restaurantsData')) || initialRestaurantsData;
         let currentSort = { field: 'licenseExpiry', order: 'asc' };
         let editingCarId = null;
         let editingDeliveryId = null;
         let editingRestaurantId = null;
         let scratches = [];
 
-        // دالة لحفظ جميع البيانات في التخزين المحلي
+        // دالة لحفظ جميع البيانات
         function saveAllData() {
             try {
                 localStorage.setItem('carsData', JSON.stringify(carsData));
@@ -1436,19 +1529,16 @@
 
         function initializeApp() {
             setupEventListeners();
-            loadCompanySettings();
-            loadAllData(); // تحميل البيانات وعرضها
+            loadAllData();
             checkLicenseExpiry();
             initializeCarSketch();
         }
 
         function setupEventListeners() {
-            // تبديل الأقسام
             document.querySelectorAll('.nav-tab').forEach(tab => {
                 tab.addEventListener('click', switchTab);
             });
             
-            // إدارة السيارات
             document.getElementById('importCarsFile').addEventListener('change', function() {
                 importFromExcel('cars', this.files[0]);
             });
@@ -1456,8 +1546,8 @@
             document.getElementById('addNewCar').addEventListener('click', showCarModal);
             document.getElementById('sortByLicense').addEventListener('click', () => sortCarsBy('licenseExpiry'));
             document.getElementById('sortByAdLicense').addEventListener('click', () => sortCarsBy('adLicenseExpiry'));
+            document.getElementById('sortByMunicipalityLicense').addEventListener('click', () => sortCarsBy('municipalityLicenseExpiry'));
             
-            // نموذج التسليم/الاستلام
             document.getElementById('showDeliveryForm').addEventListener('click', showDeliveryForm);
             document.getElementById('showReceiptForm').addEventListener('click', showReceiptForm);
             document.getElementById('cancelDelivery').addEventListener('click', function() {
@@ -1468,7 +1558,6 @@
             document.getElementById('saveDelivery').addEventListener('click', saveDelivery);
             document.getElementById('clearScratches').addEventListener('click', clearScratches);
             
-            // البحث عن السيارات (مهم جداً ليعمل في حقل رقم السيارة)
             document.getElementById('carNumber').addEventListener('input', function() {
                 searchCars(this.value);
             });
@@ -1485,7 +1574,6 @@
                 searchCarHistory(this.value);
             });
             
-            // أزرار التصدير والطباعة للسيارات
             document.getElementById('printCarsTable').addEventListener('click', () => 
                 printTable('carsTable', 'بيانات السيارات'));
             document.getElementById('exportCarsPDF').addEventListener('click', () => 
@@ -1493,7 +1581,6 @@
             document.getElementById('exportCarsExcel').addEventListener('click', () => 
                 exportTableToExcel(carsData, 'بيانات السيارات'));
             
-            // أزرار التصدير والطباعة للتسليم
             document.getElementById('printDelivery').addEventListener('click', () => 
                 printTable('deliveryTable', 'تسليم السيارات'));
             document.getElementById('exportDeliveryPDF').addEventListener('click', () => 
@@ -1501,36 +1588,29 @@
             document.getElementById('exportDeliveryExcel').addEventListener('click', () => 
                 exportTableToExcel(deliveriesData, 'تسليم السيارات'));
             
-            // أزرار التصدير والطباعة للتاريخ
             document.getElementById('printHistory').addEventListener('click', printCarHistory);
             document.getElementById('exportHistoryPDF').addEventListener('click', exportCarHistoryPDF);
             document.getElementById('exportHistoryExcel').addEventListener('click', exportCarHistoryExcel);
             
-            // أزرار التقارير
             document.getElementById('monthlyReport').addEventListener('click', () => generateReport('monthly'));
             document.getElementById('yearlyReport').addEventListener('click', () => generateReport('yearly'));
             document.getElementById('expiryReport').addEventListener('click', () => generateReport('expiry'));
             document.getElementById('exportReport').addEventListener('click', () => 
                 exportTableToExcel(generateReportData(), 'التقارير والإحصائيات'));
             
-            // أزرار التنبيهات
             document.getElementById('refreshAlerts').addEventListener('click', loadAlertsData);
             document.getElementById('exportAlerts').addEventListener('click', exportAlertsToExcel);
             
-            // الإعدادات
             document.getElementById('importRestaurantsFile').addEventListener('change', function() {
                 importFromExcel('restaurants', this.files[0]);
             });
             document.getElementById('addRestaurant').addEventListener('click', showRestaurantModal);
-            document.getElementById('saveCompanySettings').addEventListener('click', saveCompanySettings);
             
-            // إغلاق النماذج
             document.getElementById('closeCarModal').addEventListener('click', () => 
                 document.getElementById('carModal').style.display = 'none');
             document.getElementById('closeRestaurantModal').addEventListener('click', () => 
                 document.getElementById('restaurantModal').style.display = 'none');
             
-            // حفظ النماذج
             document.getElementById('saveCar').addEventListener('click', saveCar);
             document.getElementById('cancelCar').addEventListener('click', () => 
                 document.getElementById('carModal').style.display = 'none');
@@ -1538,18 +1618,15 @@
             document.getElementById('cancelRestaurant').addEventListener('click', () => 
                 document.getElementById('restaurantModal').style.display = 'none');
             
-            // شريط التنبيهات المختصر
             document.getElementById('viewAlertsBtn').addEventListener('click', function() {
                 document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
                 document.querySelectorAll('.content-section').forEach(section => section.classList.remove('active'));
                 
-                // تفعيل تبويب التنبيهات
                 const alertsTab = Array.from(document.querySelectorAll('.nav-tab')).find(tab => tab.getAttribute('data-target') === 'alerts');
                 if (alertsTab) alertsTab.classList.add('active');
                 document.getElementById('alerts').classList.add('active');
             });
 
-            // إغلاق النماذج عند النقر خارجها
             window.addEventListener('click', function(event) {
                 if (event.target.classList.contains('modal')) {
                     event.target.style.display = 'none';
@@ -1681,7 +1758,7 @@
             
             if (restaurantsData.length === 0) {
                 const row = document.createElement('tr');
-                row.innerHTML = `<td colspan="4" style="text-align: center;">لا توجد مواقع مسجلة</td>`;
+                row.innerHTML = `<td colspan="2" style="text-align: center;">لا توجد مواقع مسجلة</td>`;
                 tbody.appendChild(row);
                 return;
             }
@@ -1690,8 +1767,6 @@
                 const row = document.createElement('tr');
                 row.innerHTML = `
                     <td>${restaurant.name}</td>
-                    <td>${restaurant.type}</td>
-                    <td>${restaurant.address}</td>
                     <td class="no-export">
                         <button class="btn btn-warning edit-restaurant" data-id="${restaurant.id}">تعديل</button>
                         <button class="btn btn-danger delete-restaurant" data-id="${restaurant.id}">حذف</button>
@@ -1812,34 +1887,17 @@
         }
 
         function showDeliveryForm() {
-            console.log('📝 فتح نموذج تسليم جديد');
-            
-            // إعادة تعيين النموذج
             resetDeliveryForm();
-            
-            // إظهار النموذج
             document.getElementById('deliveryForm').style.display = 'block';
             document.getElementById('receiptForm').style.display = 'none';
-            
-            // تعيين تاريخ اليوم تلقائياً
             const today = new Date().toISOString().split('T')[0];
             document.getElementById('receiveDate').value = today;
-            
-            // إخفاء النموذج الآخر
             editingDeliveryId = null;
-            
-            console.log('✅ نموذج التسليم جاهز للاستخدام');
         }
 
         function showReceiptForm() {
             document.getElementById('receiptForm').style.display = 'block';
             document.getElementById('deliveryForm').style.display = 'none';
-            
-            const companyName = localStorage.getItem('companyName') || "شركة نايف للأغذية";
-            const companyLogo = localStorage.getItem('companyLogo') || "https://i.postimg.cc/NM2zJWZD/NAIF-LOGO.jpg";
-            
-            document.getElementById('receiptCompanyName').textContent = companyName;
-            document.getElementById('receiptLogo').src = companyLogo;
             
             document.getElementById('receiptCarNumber').textContent = '';
             document.getElementById('receiptRestaurant').textContent = '';
@@ -1857,41 +1915,30 @@
             document.getElementById('deliveryForm').style.display = 'none';
             document.getElementById('receiptForm').style.display = 'none';
             
-            // إخفاء نتائج البحث
             const carSearchResults = document.getElementById('carSearchResults');
             const restaurantSearchResults = document.getElementById('restaurantSearchResults');
             if (carSearchResults) carSearchResults.style.display = 'none';
             if (restaurantSearchResults) restaurantSearchResults.style.display = 'none';
             
-            // إخفاء رسائل الخطأ
             const carNumberError = document.getElementById('carNumberError');
             const restaurantNameError = document.getElementById('restaurantNameError');
             if (carNumberError) carNumberError.style.display = 'none';
             if (restaurantNameError) restaurantNameError.style.display = 'none';
             
-            // إعادة تعيين المتغيرات
             editingDeliveryId = null;
             scratches = [];
-            
-            // تحديث قائمة الخدوش
             updateScratchesList();
-            
-            console.log('✅ تم إخفاء نموذج التسليم');
         }
 
         function resetDeliveryForm() {
-            // إعادة تعيين جميع حقول النموذج
-            const fields = [
-                'carNumber', 'restaurantName', 'driverName', 'phoneNumber',
-                'receiveDate', 'deliveryDate', 'notes'
-            ];
+            const fields = ['carNumber', 'restaurantName', 'driverName', 'phoneNumber', 'receiveDate', 'deliveryDate', 'notes'];
             
             fields.forEach(fieldId => {
                 const element = document.getElementById(fieldId);
                 if (element) {
                     if (element.type === 'date') {
                         if (fieldId === 'receiveDate') {
-                            element.valueAsDate = new Date(); // تاريخ اليوم
+                            element.valueAsDate = new Date();
                         } else {
                             element.value = '';
                         }
@@ -1901,19 +1948,12 @@
                 }
             });
             
-            // إعادة تعيين الخدوش
             scratches = [];
             updateScratchesList();
-            
-            // إخفاء رسائل الخطأ
             document.getElementById('carNumberError').style.display = 'none';
             document.getElementById('restaurantNameError').style.display = 'none';
-            
-            // إخفاء نتائج البحث
             document.getElementById('carSearchResults').style.display = 'none';
             document.getElementById('restaurantSearchResults').style.display = 'none';
-            
-            console.log('✅ تم إعادة تعيين نموذج التسليم');
         }
 
         function saveDelivery() {
@@ -1926,7 +1966,7 @@
             const notes = document.getElementById('notes').value;
             
             if (!carNumber || !restaurantName || !driverName) {
-                alert('يرجى ملء الحقول الإجبارية (رقم السيارة، اسم المطعم، اسم السائق)');
+                alert('يرجى ملء الحقول الإجبارية (رقم السيارة، اسم الموقع، اسم السائق)');
                 return;
             }
             
@@ -1947,7 +1987,7 @@
             const restaurantExists = restaurantsData.some(restaurant => restaurant.name === restaurantName);
             if (!restaurantExists) {
                 document.getElementById('restaurantNameError').style.display = 'block';
-                alert('المطعم غير مسجل في النظام');
+                alert('الموقع غير مسجل في النظام');
                 return;
             }
             document.getElementById('restaurantNameError').style.display = 'none';
@@ -1995,7 +2035,6 @@
             loadDeliveriesData();
             updateStats();
             hideDeliveryForm();
-            
             alert('تم حفظ بيانات التسليم بنجاح');
         }
 
@@ -2009,10 +2048,9 @@
             const receiptHTML = `
                 <div class="receipt-container">
                     <div class="receipt-header">
-                        <img id="receiptLogo" src="${localStorage.getItem('companyLogo') || 'https://i.postimg.cc/NM2zJWZD/NAIF-LOGO.jpg'}" alt="شعار الشركة" class="receipt-logo">
+                        <img src="https://i.postimg.cc/NM2zJWZD/NAIF-LOGO.jpg" alt="شعار الشركة" class="receipt-logo">
                         <h1 class="receipt-title">نموذج استلام سيارة</h1>
-                        <div class="receipt-company">${localStorage.getItem('companyName') || 'شركة نايف للأغذية'}</div>
-                        <div>${localStorage.getItem('companyInfo') || ''}</div>
+                        <div class="receipt-company">شركة نايف للأغذية</div>
                     </div>
                     
                     <div class="receipt-details">
@@ -2024,7 +2062,7 @@
                                     <td>${delivery.carNumber}</td>
                                 </tr>
                                 <tr>
-                                    <th>اسم المطعم/المخزن</th>
+                                    <th>اسم الموقع</th>
                                     <td>${delivery.restaurant}</td>
                                 </tr>
                                 <tr>
@@ -2240,7 +2278,6 @@
             updateAlertsBar();
             checkLicenseExpiry();
             document.getElementById('carModal').style.display = 'none';
-            
             alert('تم حفظ بيانات السيارة بنجاح');
         }
 
@@ -2292,17 +2329,13 @@
             document.getElementById('restaurantModal').style.display = 'block';
             document.getElementById('restaurantModal').querySelector('h2').textContent = 'إضافة موقع جديد';
             document.getElementById('newRestaurantName').value = '';
-            document.getElementById('newRestaurantType').value = 'مطعم';
-            document.getElementById('newRestaurantAddress').value = '';
         }
 
         function saveRestaurant() {
             const name = document.getElementById('newRestaurantName').value;
-            const type = document.getElementById('newRestaurantType').value;
-            const address = document.getElementById('newRestaurantAddress').value;
 
-            if (!name || !type || !address) {
-                alert('يرجى ملء جميع الحقول الإجبارية');
+            if (!name) {
+                alert('يرجى ملء اسم الموقع');
                 return;
             }
             
@@ -2311,17 +2344,13 @@
                 if (restaurantIndex !== -1) {
                     restaurantsData[restaurantIndex] = {
                         ...restaurantsData[restaurantIndex],
-                        name: name,
-                        type: type,
-                        address: address
+                        name: name
                     };
                 }
             } else {
                 const newRestaurant = {
                     id: restaurantsData.length > 0 ? Math.max(...restaurantsData.map(r => r.id)) + 1 : 1,
-                    name: name,
-                    type: type,
-                    address: address
+                    name: name
                 };
                 
                 restaurantsData.push(newRestaurant);
@@ -2341,8 +2370,6 @@
                 document.getElementById('restaurantModal').style.display = 'block';
                 document.getElementById('restaurantModal').querySelector('h2').textContent = 'تعديل بيانات الموقع';
                 document.getElementById('newRestaurantName').value = restaurant.name;
-                document.getElementById('newRestaurantType').value = restaurant.type;
-                document.getElementById('newRestaurantAddress').value = restaurant.address;
             }
         }
 
@@ -2353,51 +2380,6 @@
                 loadRestaurantsData();
                 updateStats();
                 alert('تم حذف الموقع بنجاح');
-            }
-        }
-
-        function saveCompanySettings() {
-            const companyName = document.getElementById('companyName').value;
-            const companyLogo = document.getElementById('companyLogo').value;
-            const companyInfo = document.getElementById('companyInfo').value;
-            
-            localStorage.setItem('companyName', companyName);
-            localStorage.setItem('companyLogo', companyLogo);
-            localStorage.setItem('companyInfo', companyInfo);
-            
-            updateCompanyDisplay();
-            
-            alert('تم حفظ إعدادات الشركة بنجاح');
-        }
-
-        function loadCompanySettings() {
-            const companyName = localStorage.getItem('companyName') || "شركة نايف للأغذية";
-            const companyLogo = localStorage.getItem('companyLogo') || "https://i.postimg.cc/NM2zJWZD/NAIF-LOGO.jpg";
-            const companyInfo = localStorage.getItem('companyInfo') || "شركة رائدة في مجال الأغذية والمشروبات";
-            
-            document.getElementById('companyName').value = companyName;
-            document.getElementById('companyLogo').value = companyLogo;
-            document.getElementById('companyInfo').value = companyInfo;
-            
-            updateCompanyDisplay();
-        }
-
-        function updateCompanyDisplay() {
-            const companyName = localStorage.getItem('companyName') || "شركة نايف للأغذية";
-            const companyLogo = localStorage.getItem('companyLogo') || "https://i.postimg.cc/NM2zJWZD/NAIF-LOGO.jpg";
-            
-            const companyNameHeader = document.getElementById('companyNameHeader');
-            const companyLogoHeader = document.getElementById('companyLogoHeader');
-            
-            if (companyName) {
-                companyNameHeader.textContent = companyName;
-            }
-            
-            if (companyLogo) {
-                companyLogoHeader.src = companyLogo;
-                companyLogoHeader.style.display = 'block';
-            } else {
-                companyLogoHeader.style.display = 'none';
             }
         }
 
@@ -2494,7 +2476,6 @@
             renderScratches();
         }
 
-        // دالة البحث عن السيارات (مهمة جداً لتظهر النتائج في حقل رقم السيارة)
         function searchCars(query) {
             const resultsContainer = document.getElementById('carSearchResults');
             resultsContainer.innerHTML = '';
@@ -2575,7 +2556,7 @@
                             <tr>
                                 <th>اسم السائق</th>
                                 <th>رقم الموبايل</th>
-                                <th>اسم المطعم</th>
+                                <th>اسم الموقع</th>
                                 <th>تاريخ الاستلام</th>
                                 <th>تاريخ التسليم</th>
                                 <th>ملاحظات</th>
@@ -2681,8 +2662,8 @@
                 let bValue = b[field];
                 
                 if (field.includes('Expiry')) {
-                    aValue = new Date(aValue);
-                    bValue = new Date(bValue);
+                    aValue = aValue ? new Date(aValue) : new Date(0);
+                    bValue = bValue ? new Date(bValue) : new Date(0);
                 }
                 
                 if (aValue < bValue) return currentSort.order === 'asc' ? -1 : 1;
@@ -2788,28 +2769,102 @@
             html2pdf().set(opt).from(tempDiv).save();
         }
 
-        function exportCarHistoryPDF() {
+        // دالة تصدير كشف السيارة إلى PDF باستخدام القالب المخفي (الطريقة المرفقة)
+        async function exportCarHistoryPDF() {
             const carDetails = document.getElementById('carDetails');
-            if (carDetails.innerHTML.trim() !== '') {
-                exportElementToPDF(carDetails, 'كشف السيارة');
-            } else {
+            if (carDetails.innerHTML.trim() === '') {
                 alert('لا توجد بيانات للتصدير');
+                return;
             }
-        }
 
-        function exportElementToPDF(element, title) {
-            const opt = {
-                margin: 10,
-                filename: `${title}.pdf`,
-                image: { type: 'jpeg', quality: 0.98 },
-                html2canvas: { scale: 2, useCORS: true },
-                jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
-            };
-
-            const tempDiv = document.createElement('div');
-            tempDiv.innerHTML = `<h2 style="text-align: center; margin-bottom: 20px;">${title}</h2>${element.innerHTML}`;
+            // استخراج بيانات السيارة المعروضة
+            const carNumberElem = carDetails.querySelector('h3');
+            if (!carNumberElem) return;
             
-            html2pdf().set(opt).from(tempDiv).save();
+            const carNumber = carNumberElem.textContent.replace('تفاصيل السيارة: ', '');
+            const car = carsData.find(c => c.number === carNumber);
+            if (!car) return;
+
+            // تجهيز قالب PDF
+            const template = document.getElementById('pdf-template');
+            const originalDisplay = template.style.display;
+            const originalPosition = template.style.position;
+            const originalLeft = template.style.left;
+            const originalTop = template.style.top;
+
+            template.style.display = 'block';
+            template.style.position = 'fixed';
+            template.style.left = '0';
+            template.style.top = '0';
+            template.style.zIndex = '10000';
+
+            // تعبئة البيانات
+            document.getElementById('pdf-car-number').textContent = car.number;
+            document.getElementById('pdf-print-date').textContent = new Date().toLocaleDateString('ar-KW');
+
+            const carInfoDiv = document.getElementById('pdf-car-info');
+            carInfoDiv.innerHTML = `
+                <strong>نوع السيارة:</strong> ${car.type} | 
+                <strong>موديل:</strong> ${car.model} | 
+                <strong>سنة الصنع:</strong> ${car.year} | 
+                <strong>انتهاء الترخيص:</strong> ${car.licenseExpiry} | 
+                <strong>انتهاء الإعلان:</strong> ${car.adLicenseExpiry || '-'} | 
+                <strong>انتهاء البلدية:</strong> ${car.municipalityLicenseExpiry || '-'} | 
+                <strong>الحالة:</strong> ${car.status}
+            `;
+
+            const carDeliveries = deliveriesData.filter(d => d.carNumber === car.number);
+            const tableBody = document.getElementById('pdf-table-body');
+            tableBody.innerHTML = '';
+
+            if (carDeliveries.length === 0) {
+                const row = document.createElement('tr');
+                row.innerHTML = `<td colspan="6" style="text-align: center;">لا توجد حركات مسجلة لهذه السيارة</td>`;
+                tableBody.appendChild(row);
+            } else {
+                carDeliveries.forEach(d => {
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+                        <td>${d.receiveDate}</td>
+                        <td>${d.deliveryDate || '-'}</td>
+                        <td>${d.driverName}</td>
+                        <td>${d.phoneNumber || '-'}</td>
+                        <td>${d.restaurant}</td>
+                        <td>${d.notes || '-'}</td>
+                    `;
+                    tableBody.appendChild(row);
+                });
+            }
+
+            try {
+                const canvas = await html2canvas(template, {
+                    scale: 2,
+                    useCORS: true,
+                    logging: false,
+                    backgroundColor: '#FFFFFF',
+                    width: 794,
+                    height: 1123,
+                    windowWidth: 794,
+                    windowHeight: 1123
+                });
+
+                const imgData = canvas.toDataURL('image/jpeg', 0.95);
+                const pdf = new window.jspdf.jsPDF('p', 'pt', 'a4');
+                const imgWidth = pdf.internal.pageSize.getWidth();
+                const imgHeight = (canvas.height * imgWidth) / canvas.width;
+                pdf.addImage(imgData, 'JPEG', 0, 0, imgWidth, imgHeight);
+                pdf.save(`كشف_بيانات_${car.number}.pdf`);
+
+            } catch (error) {
+                console.error('Error generating PDF:', error);
+                alert('حدث خطأ أثناء إنشاء ملف PDF');
+            } finally {
+                template.style.display = originalDisplay;
+                template.style.position = originalPosition;
+                template.style.left = originalLeft;
+                template.style.top = originalTop;
+                template.style.zIndex = '-1000';
+            }
         }
 
         function exportTableToExcel(data, title) {
@@ -3255,9 +3310,7 @@
                     jsonData.forEach(item => {
                         const newRestaurant = {
                             id: restaurantsData.length > 0 ? Math.max(...restaurantsData.map(r => r.id)) + 1 : 1,
-                            name: item['اسم الموقع'] || item['Location Name'],
-                            type: item['النوع'] || item['Type'] || 'مطعم',
-                            address: item['العنوان'] || item['Address']
+                            name: item['اسم الموقع'] || item['Location Name']
                         };
                         
                         restaurantsData.push(newRestaurant);
