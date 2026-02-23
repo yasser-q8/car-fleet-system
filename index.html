@@ -1328,7 +1328,7 @@
                 <div id="carDetails"></div>
             </section>
 
-            <!-- قسم الإعدادات (تم إزالة جميع الحقول) -->
+            <!-- قسم الإعدادات -->
             <section id="settings" class="content-section">
                 <h2 class="section-title">الإعدادات</h2>
                 
@@ -1336,6 +1336,12 @@
                     <label for="importRestaurantsFile" class="file-input-label">استيراد مواقع من Excel</label>
                     <input type="file" id="importRestaurantsFile" class="file-input" accept=".xlsx, .xls">
                     <button class="btn btn-primary" id="addRestaurant">إضافة موقع جديد</button>
+                </div>
+                
+                <!-- أزرار النسخ الاحتياطي والاستعادة (مضافة حديثاً) -->
+                <div class="action-buttons" style="margin-top: 20px; margin-bottom: 20px;">
+                    <button class="btn btn-primary" id="backupDataBtn">📁 نسخ احتياطي إلى مجلد البيانات</button>
+                    <button class="btn btn-secondary" id="restoreDataBtn">🔄 استعادة من مجلد البيانات</button>
                 </div>
                 
                 <h3>إدارة المواقع</h3>
@@ -1490,7 +1496,7 @@
             { id: 31, number: '14/11023', type: 'دايهاتسو', model: '2016', year: 2016, licenseExpiry: '2026-10-15', adLicenseExpiry: null, municipalityLicenseExpiry: null, status: 'نشطة' },
             { id: 32, number: '13/16479', type: 'دايهاتسو', model: '2016', year: 2016, licenseExpiry: '2026-11-29', adLicenseExpiry: null, municipalityLicenseExpiry: null, status: 'نشطة' },
             { id: 33, number: '22/29845', type: 'تويوتا', model: '2023', year: 2023, licenseExpiry: '2026-11-08', adLicenseExpiry: null, municipalityLicenseExpiry: null, status: 'نشطة' },
-            { id: 34, number: '22/30275', type: 'تويوتا', model: '2023', year: 2023, licenseExpiry: '2026-01-08', adLicenseExpiry: null, municipalityLicenseExpiry: null, status: 'نشطة' }
+            { id: 34, number: '22/30275', type: 'تويوتا', model: '2023', year: 2023, licenseExpiry: '2026-11-08', adLicenseExpiry: null, municipalityLicenseExpiry: null, status: 'نشطة' }
         ];
 
         // ========== المواقع الثابتة ==========
@@ -1632,6 +1638,70 @@
                     event.target.style.display = 'none';
                 }
             });
+
+            // ========== أحداث النسخ الاحتياطي والاستعادة (مضافة حديثاً) ==========
+            document.getElementById('backupDataBtn').addEventListener('click', () => {
+                const backupData = {
+                    cars: carsData,
+                    deliveries: deliveriesData,
+                    restaurants: restaurantsData
+                };
+                // التحقق من وجود electronAPI (بيئة Electron)
+                if (window.electronAPI) {
+                    window.electronAPI.saveAutoBackup(JSON.stringify(backupData, null, 2));
+                } else {
+                    alert('وظيفة النسخ الاحتياطي غير متاحة حالياً (تعمل فقط داخل التطبيق)');
+                }
+            });
+
+            if (window.electronAPI) {
+                window.electronAPI.onAutoBackupSaved((event, result) => {
+                    if (result.success) {
+                        alert(`✅ تم حفظ النسخة الاحتياطية بنجاح في:\n${result.path}`);
+                    } else {
+                        alert('❌ خطأ في حفظ النسخة: ' + result.error);
+                    }
+                });
+
+                document.getElementById('restoreDataBtn').addEventListener('click', () => {
+                    window.electronAPI.loadAutoBackup();
+                });
+
+                window.electronAPI.onAutoBackupLoaded((event, result) => {
+                    if (result.success) {
+                        if (confirm('⚠️ سيتم استبدال البيانات الحالية. هل أنت متأكد؟')) {
+                            try {
+                                const data = JSON.parse(result.data);
+                                // تحديث المتغيرات العامة
+                                carsData = data.cars || [];
+                                deliveriesData = data.deliveries || [];
+                                restaurantsData = data.restaurants || [];
+                                // حفظ في localStorage
+                                localStorage.setItem('carsData', JSON.stringify(carsData));
+                                localStorage.setItem('deliveriesData', JSON.stringify(deliveriesData));
+                                localStorage.setItem('restaurantsData', JSON.stringify(restaurantsData));
+                                // إعادة تحميل الجداول
+                                loadCarsData();
+                                loadDeliveriesData();
+                                loadRestaurantsData();
+                                updateStats();
+                                updateAlertsBar();
+                                checkLicenseExpiry();
+                                alert('✅ تم استعادة البيانات بنجاح');
+                            } catch (e) {
+                                alert('❌ خطأ في قراءة البيانات: ' + e.message);
+                            }
+                        }
+                    } else {
+                        alert('❌ فشل تحميل النسخة: ' + result.error);
+                    }
+                });
+            } else {
+                // في حالة عدم وجود electronAPI (مثلاً عند فتح الملف مباشرة في المتصفح)
+                document.getElementById('restoreDataBtn').addEventListener('click', () => {
+                    alert('وظيفة الاستعادة غير متاحة حالياً (تعمل فقط داخل التطبيق)');
+                });
+            }
         }
 
         function switchTab() {
